@@ -1,8 +1,8 @@
 import React from "react";
-import HeaderSection from "./components/HomePage/HeaderSection";
-import HomeSection from "./components/HomePage/HomeSection";
-import AppointmentSection from "./components/HomePage/AppointmentSection";
-import AboutSection from "./components/HomePage/AboutSection";
+import HeaderSection from "../components/HomePage/HeaderSection";
+import HomeSection from "../components/HomePage/HomeSection";
+import AppointmentSection from "../components/HomePage/AppointmentSection";
+import AboutSection from "../components/HomePage/AboutSection";
 
 const Home = () => {
   return (
