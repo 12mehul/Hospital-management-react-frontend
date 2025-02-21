@@ -32,7 +32,7 @@ const Sidebar = () => {
             >
               <span className="text-xl">📋</span>
               <span className="flex-1 ml-3 whitespace-nowrap">
-                Appointment List
+                Appointment Lists
               </span>
             </Link>
           </li>
@@ -43,7 +43,7 @@ const Sidebar = () => {
             >
               <span className="text-xl">🧑‍⚕️</span>
               <span className="flex-1 ml-3 whitespace-nowrap">
-                Patients List
+                Patient Lists
               </span>
             </Link>
           </li>
