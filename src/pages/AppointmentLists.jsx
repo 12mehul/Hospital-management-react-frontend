@@ -71,9 +71,8 @@ const AppointmentLists = () => {
                     </td>
                     <td className="p-5">
                       <div className="flex items-center gap-1">
-                        <button className="p-2 rounded-full group transition-all duration-500 flex item-center">
+                        <button className="p-2 cursor-pointer rounded-full group transition-all duration-500 flex item-center">
                           <svg
-                            className="cursor-pointer"
                             width="20"
                             height="20"
                             viewBox="0 0 20 20"
@@ -87,9 +86,8 @@ const AppointmentLists = () => {
                             ></path>
                           </svg>
                         </button>
-                        <button className="p-2 rounded-full group transition-all duration-500 flex item-center">
+                        <button className="p-2 cursor-pointer rounded-full group transition-all duration-500 flex item-center">
                           <svg
-                            className=""
                             width="20"
                             height="20"
                             viewBox="0 0 20 20"
@@ -103,7 +101,7 @@ const AppointmentLists = () => {
                             ></path>
                           </svg>
                         </button>
-                        <button className="p-2 rounded-full group transition-all duration-500 flex item-center">
+                        <button className="p-2 cursor-pointer rounded-full group transition-all duration-500 flex item-center">
                           <svg
                             width="20"
                             height="20"
