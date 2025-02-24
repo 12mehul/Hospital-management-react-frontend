@@ -2,7 +2,7 @@ import React from "react";
 
 const AppointmentLists = () => {
   return (
-    <div>
+    <>
       <h2 className="pb-5 flex items-center justify-center text-2xl font-semibold text-gray-700 uppercase">
         Appointment Lists
       </h2>
@@ -127,7 +127,7 @@ const AppointmentLists = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

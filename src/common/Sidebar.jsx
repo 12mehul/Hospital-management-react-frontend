@@ -6,7 +6,7 @@ const Sidebar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <div className="relative h-screen w-60 bg-white duration-200 ease-in-out rounded-b-md shadow-md shadow-sky-200/50 z-50">
+    <main className="w-60 bg-white duration-200 ease-in-out rounded-b-md shadow-lg shadow-sky-400/50 z-50">
       <div className="px-3 py-4 rounded">
         <ul className="space-y-2">
           <li>
@@ -70,7 +70,7 @@ const Sidebar = () => {
           </li>
         </ul>
       </div>
-    </div>
+    </main>
   );
 };
 
