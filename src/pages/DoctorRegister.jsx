@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/img/logo.png";
+import { useFetch } from "../customHooks/useFetch";
 
 const DoctorRegister = () => {
+  const { data } = useFetch("/speciality");
+
   const [step, setStep] = useState(1);
 
   const nextStep = () => {

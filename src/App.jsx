@@ -8,21 +8,32 @@ import Layout from "./common/Layout";
 import BookAppointment from "./pages/BookAppointment";
 import AppointmentLists from "./pages/AppointmentLists";
 import PatientLists from "./pages/PatientLists";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Public Routes - No AuthProvider */}
         <Route path="/" element={<Home />} />
-        <Route path="/" element={<Layout />}>
+        <Route path="/login" element={<Login />} />
+        <Route path="/patientRegister" element={<PatientRegister />} />
+        <Route path="/doctorRegister" element={<DoctorRegister />} />
+
+        {/* Protected Routes Wrapped in AuthProvider */}
+        <Route
+          path="/"
+          element={
+            <AuthProvider>
+              <Layout />
+            </AuthProvider>
+          }
+        >
           <Route path="appointment" element={<BookAppointment />} />
           <Route path="appointment/lists" element={<AppointmentLists />} />
           <Route path="patients" element={<PatientLists />} />
           <Route path="profile" element={<Profile />} />
         </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/patientRegister" element={<PatientRegister />} />
-        <Route path="/doctorRegister" element={<DoctorRegister />} />
       </Routes>
     </BrowserRouter>
   );
