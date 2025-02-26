@@ -1,8 +1,75 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/img/logo.png";
+import { emailRegex } from "../regularExpressions/regex";
+import authFetch from "../axiosbase/custom";
+import { showErrorToast, showSuccessToast } from "../toastContainer/Toastify";
+import Loader from "../common/Loader";
+
+const initialValues = { email: "", password: "" };
 
 const Login = () => {
+  const [formValues, setFormValues] = useState(initialValues);
+  const [formErrors, setFormErrors] = useState({});
+  const [loader, setLoader] = useState(false);
+
+  const validateField = (name, value) => {
+    if (name === "email") {
+      if (!value) return "Email is required";
+      if (!emailRegex.test(value)) return "Invalid email format";
+    }
+    if (name === "password" && !value) {
+      return "Password is required";
+    }
+    return "";
+  };
+
+  // Validate all fields before submission
+  const validateForm = () => {
+    const errors = Object.keys(formValues).reduce((acc, key) => {
+      const error = validateField(key, formValues[key]);
+      if (error) acc[key] = error;
+      return acc;
+    }, {});
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues((prevValues) => ({ ...prevValues, [name]: value }));
+
+    // Validate field dynamically
+    setFormErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: validateField(name, value),
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+    setLoader(true);
+
+    try {
+      const res = await authFetch.post("/accounts/login", formValues);
+      if (res.status === 200) {
+        setLoader(false);
+        showSuccessToast(res.data.msg);
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("id", res.data.userId);
+        localStorage.setItem("role", res.data.role);
+        setFormValues(initialValues);
+        setTimeout(() => {
+          window.location.href = "/appointment";
+        }, 3000);
+      }
+    } catch (error) {
+      setLoader(false);
+      showErrorToast(error.response?.data.msg);
+    }
+  };
+
   return (
     <div className="bg-cover bg-[url('./assets/img/patient-bg.jpg')]">
       <div className="w-full h-screen flex flex-col">
@@ -23,45 +90,68 @@ const Login = () => {
               Login Form
             </h2>
             <p className="mb-1 text-slate-500">Hi, Welcome back 👋</p>
-            <form>
+            <form onSubmit={handleSubmit} noValidate>
               <div className="py-3 flex flex-col gap-4">
                 <div>
                   <input
                     type="email"
-                    className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                    className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
+                      formErrors.email
+                        ? "border border-red-500"
+                        : "border-2 border-cyan-100 border-b-cyan-300"
+                    }`}
                     placeholder="Enter your email"
                     name="email"
+                    value={formValues.email}
+                    onChange={handleInputChange}
+                    onBlur={handleInputChange}
                   />
-                  <span className="pl-2 text-red-500"></span>
+                  <span className="pl-2 text-red-500">{formErrors.email}</span>
                 </div>
                 <div className="w-full">
                   <input
                     type="password"
-                    className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                    className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
+                      formErrors.password
+                        ? "border border-red-500"
+                        : "border-2 border-cyan-100 border-b-cyan-300"
+                    }`}
                     placeholder="Enter your password"
                     name="password"
+                    value={formValues.password}
+                    onChange={handleInputChange}
+                    onBlur={handleInputChange}
                   />
-                  <span className="pl-2 text-red-500"></span>
+                  <span className="pl-2 text-red-500">
+                    {formErrors.password}
+                  </span>
                 </div>
                 <button
-                  className="w-full py-3 font-medium text-white bg-blue-500 shadow-lg shadow-blue-500/50 hover:bg-blue-400 rounded-xl inline-flex space-x-2 items-center justify-center"
+                  className="w-full cursor-pointer py-3 font-medium text-white bg-blue-500 shadow-lg shadow-blue-500/50 hover:bg-blue-400 rounded-xl inline-flex space-x-2 items-center justify-center"
                   type="submit"
+                  disabled={loader}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-                    />
-                  </svg>
-                  <span>Submit</span>
+                  {loader ? (
+                    <Loader />
+                  ) : (
+                    <>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+                        />
+                      </svg>
+                      <span>Submit</span>
+                    </>
+                  )}
                 </button>
               </div>
             </form>
