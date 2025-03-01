@@ -1,11 +1,17 @@
 import React from "react";
+import { useAuth } from "../context/AuthContext";
 
 const Profile = () => {
+  const { user, setUser } = useAuth();
+  const role = localStorage.getItem("role");
+
   return (
     <div className="w-full mx-auto flex items-center justify-center">
       <div className="max-w-2xl w-full h-auto bg-white p-3 rounded-xl shadow-lg shadow-sky-200/50">
         <h2 className="my-3 flex items-center justify-center text-xl font-semibold text-blue-800">
-          Welcome, Doctor/Patient. Here is your profile information
+          Welcome,{" "}
+          {role === "patient" ? "Patient" : role === "doctor" ? "Doctor" : ""}.
+          Here is your profile information
         </h2>
         <form>
           <div className="flex flex-col gap-4">

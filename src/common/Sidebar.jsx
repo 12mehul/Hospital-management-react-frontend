@@ -1,21 +1,30 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Sidebar = () => {
   const location = useLocation();
+  const { user } = useAuth();
   const isActive = (path) => location.pathname === path;
+  const role = localStorage.getItem("role");
 
   return (
     <main className="w-60 bg-white duration-200 ease-in-out rounded-b-md shadow-lg shadow-sky-400/50 z-50">
       <div className="px-3 py-4 rounded">
         <ul className="space-y-2">
-          <li>
-            <span className="flex items-center p-2 text-base font-semibold rounded-lg group hover:bg-purple-100 hover:text-blue-600">
-              <span className="text-xl">🆔</span>
-              <span className="ml-3">Patient:</span>
-              <span className="text-blue-700 ml-1">123456</span>
-            </span>
-          </li>
+          {role === "patient" && (
+            <li>
+              <span className="flex items-center p-2 text-base font-semibold rounded-lg group hover:bg-purple-100 hover:text-blue-600">
+                <span className="text-xl">🆔</span>
+                <span className="ml-3">Patient:</span>
+                {user && user.patientID && (
+                  <span className="text-blue-700 ml-1">
+                    {user.patientID}
+                  </span>
+                )}
+              </span>
+            </li>
+          )}
           <li>
             <Link
               to="/appointment"

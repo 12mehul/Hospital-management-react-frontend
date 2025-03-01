@@ -15,13 +15,11 @@ const initialValues = {
   dob: "",
   gender: "",
   phone: "",
-  fullAddress: {
-    addressLine: "",
-    city: "",
-    state: "",
-    country: "",
-    pincode: "",
-  },
+  addressLine: "",
+  city: "",
+  state: "",
+  country: "",
+  pincode: "",
 };
 
 const PatientRegister = () => {
@@ -71,11 +69,39 @@ const PatientRegister = () => {
     e.preventDefault();
     if (!validateForm()) return;
     setLoader(true);
-    console.log("Successfully");
-  };
 
-  console.log("@@@", formValues);
-  console.log("###", formErrors);
+    const data = {
+      firstName: formValues.firstName,
+      lastName: formValues.lastName,
+      email: formValues.email,
+      password: formValues.password,
+      dob: formValues.dob,
+      gender: formValues.gender,
+      phone: formValues.phone,
+      fullAddress: {
+        addressLine: formValues.addressLine,
+        city: formValues.city,
+        state: formValues.state,
+        country: formValues.country,
+        pincode: formValues.pincode,
+      },
+    };
+
+    try {
+      const res = await authFetch.post("/patients", data);
+      if (res.status === 201) {
+        setLoader(false);
+        showSuccessToast(res.data.msg);
+        setFormValues(initialValues);
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 3000);
+      }
+    } catch (error) {
+      setLoader(false);
+      showErrorToast(error.response?.data.msg);
+    }
+  };
 
   return (
     <div className="bg-cover bg-[url('./assets/img/patient-bg.jpg')]">
@@ -104,7 +130,11 @@ const PatientRegister = () => {
                     <div className="w-full">
                       <input
                         type="text"
-                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                        className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
+                          formErrors.firstName
+                            ? "border border-red-500"
+                            : "border-2 border-cyan-100 border-b-cyan-300"
+                        }`}
                         placeholder="Enter your first name"
                         name="firstName"
                         value={formValues.firstName}
@@ -118,7 +148,11 @@ const PatientRegister = () => {
                     <div className="w-full">
                       <input
                         type="text"
-                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                        className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
+                          formErrors.lastName
+                            ? "border border-red-500"
+                            : "border-2 border-cyan-100 border-b-cyan-300"
+                        }`}
                         placeholder="Enter your last name"
                         name="lastName"
                         value={formValues.lastName}
@@ -133,7 +167,11 @@ const PatientRegister = () => {
                   <div>
                     <input
                       type="email"
-                      className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                      className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
+                        formErrors.email
+                          ? "border border-red-500"
+                          : "border-2 border-cyan-100 border-b-cyan-300"
+                      }`}
                       placeholder="Enter your email"
                       name="email"
                       value={formValues.email}
@@ -148,7 +186,11 @@ const PatientRegister = () => {
                     <div className="w-full">
                       <input
                         type="password"
-                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                        className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
+                          formErrors.password
+                            ? "border border-red-500"
+                            : "border-2 border-cyan-100 border-b-cyan-300"
+                        }`}
                         placeholder="Enter your password"
                         name="password"
                         value={formValues.password}
@@ -162,7 +204,11 @@ const PatientRegister = () => {
                     <div className="w-full">
                       <input
                         type="password"
-                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                        className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
+                          formErrors.confirmPassword
+                            ? "border border-red-500"
+                            : "border-2 border-cyan-100 border-b-cyan-300"
+                        }`}
                         placeholder="Enter your confirm password"
                         name="confirmPassword"
                         value={formValues.confirmPassword}
@@ -182,7 +228,11 @@ const PatientRegister = () => {
                   <div>
                     <input
                       type="date"
-                      className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                      className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
+                        formErrors.dob
+                          ? "border border-red-500"
+                          : "border-2 border-cyan-100 border-b-cyan-300"
+                      }`}
                       placeholder="Enter your dob"
                       name="dob"
                       value={formValues.dob}
@@ -192,7 +242,13 @@ const PatientRegister = () => {
                     <span className="pl-2 text-red-500">{formErrors.dob}</span>
                   </div>
                   <div>
-                    <div className="w-full flex gap-3 p-3 border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md">
+                    <div
+                      className={`w-full flex gap-3 p-3 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
+                        formErrors.gender
+                          ? "border border-red-500"
+                          : "border-2 border-cyan-100 border-b-cyan-300"
+                      }`}
+                    >
                       <div className="flex items-center justify-center gap-3">
                         <input
                           type="radio"
@@ -235,7 +291,11 @@ const PatientRegister = () => {
                   <div>
                     <input
                       type="text"
-                      className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                      className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
+                        formErrors.phone
+                          ? "border border-red-500"
+                          : "border-2 border-cyan-100 border-b-cyan-300"
+                      }`}
                       placeholder="Enter your phone"
                       name="phone"
                       value={formValues.phone}
@@ -254,10 +314,14 @@ const PatientRegister = () => {
                   <div>
                     <input
                       type="text"
-                      className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                      className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
+                        formErrors.addressLine
+                          ? "border border-red-500"
+                          : "border-2 border-cyan-100 border-b-cyan-300"
+                      }`}
                       placeholder="Enter your address"
                       name="addressLine"
-                      value={formValues.fullAddress.addressLine}
+                      value={formValues.addressLine}
                       onChange={handleInputChange}
                       onBlur={handleInputChange}
                     />
@@ -269,10 +333,14 @@ const PatientRegister = () => {
                     <div className="w-full">
                       <input
                         type="text"
-                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                        className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
+                          formErrors.city
+                            ? "border border-red-500"
+                            : "border-2 border-cyan-100 border-b-cyan-300"
+                        }`}
                         placeholder="Enter your city"
                         name="city"
-                        value={formValues.fullAddress.city}
+                        value={formValues.city}
                         onChange={handleInputChange}
                         onBlur={handleInputChange}
                       />
@@ -283,10 +351,14 @@ const PatientRegister = () => {
                     <div className="w-full">
                       <input
                         type="text"
-                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                        className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
+                          formErrors.state
+                            ? "border border-red-500"
+                            : "border-2 border-cyan-100 border-b-cyan-300"
+                        }`}
                         placeholder="Enter your state"
                         name="state"
-                        value={formValues.fullAddress.state}
+                        value={formValues.state}
                         onChange={handleInputChange}
                         onBlur={handleInputChange}
                       />
@@ -299,10 +371,14 @@ const PatientRegister = () => {
                     <div className="w-full">
                       <input
                         type="text"
-                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                        className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
+                          formErrors.country
+                            ? "border border-red-500"
+                            : "border-2 border-cyan-100 border-b-cyan-300"
+                        }`}
                         placeholder="Enter your country"
                         name="country"
-                        value={formValues.fullAddress.country}
+                        value={formValues.country}
                         onChange={handleInputChange}
                         onBlur={handleInputChange}
                       />
@@ -313,10 +389,14 @@ const PatientRegister = () => {
                     <div className="w-full">
                       <input
                         type="text"
-                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                        className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
+                          formErrors.pincode
+                            ? "border border-red-500"
+                            : "border-2 border-cyan-100 border-b-cyan-300"
+                        }`}
                         placeholder="Enter your pincode"
                         name="pincode"
-                        value={formValues.fullAddress.pincode}
+                        value={formValues.pincode}
                         onChange={handleInputChange}
                         onBlur={handleInputChange}
                       />
@@ -354,22 +434,29 @@ const PatientRegister = () => {
                   <button
                     className="w-40 cursor-pointer py-3 font-medium text-white bg-blue-500 shadow-lg shadow-blue-500/50 hover:bg-blue-400 rounded-xl inline-flex space-x-2 items-center justify-center"
                     type="submit"
+                    disabled={loader}
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-                      />
-                    </svg>
-                    <span>Submit</span>
+                    {loader ? (
+                      <Loader />
+                    ) : (
+                      <>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+                          />
+                        </svg>
+                        <span>Submit</span>
+                      </>
+                    )}
                   </button>
                 )}
               </div>

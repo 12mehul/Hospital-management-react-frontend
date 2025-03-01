@@ -35,13 +35,21 @@ const BookAppointment = () => {
           )}
           <div className="flex gap-3 justify-end">
             <span
-              className="w-24 py-3 text-black hover:text-blue-800 bg-white shadow-md shadow-blue-500/50 rounded-2xl inline-flex space-x-2 items-center justify-center text-base font-medium cursor-pointer"
+              className={`w-24 py-3 hover:text-blue-700 bg-white shadow-md shadow-blue-500/50 rounded-2xl inline-flex space-x-2 items-center justify-center text-base font-medium cursor-pointer ${
+                step === 1
+                  ? "text-blue-800 underline"
+                  : "text-black no-underline"
+              }`}
               onClick={() => setStep(1)}
             >
               Speciality
             </span>
             <span
-              className="w-24 py-3 text-black hover:text-blue-800 bg-white shadow-md shadow-blue-500/50 rounded-2xl inline-flex space-x-2 items-center justify-center text-base font-medium cursor-pointer"
+              className={`w-24 py-3 hover:text-blue-700 bg-white shadow-md shadow-blue-500/50 rounded-2xl inline-flex space-x-2 items-center justify-center text-base font-medium cursor-pointer ${
+                step === 2
+                  ? "text-blue-800 underline"
+                  : "text-black no-underline"
+              }`}
               onClick={() => setStep(2)}
             >
               Doctors
