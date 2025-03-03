@@ -27,7 +27,9 @@ adminFetch.interceptors.response.use(
   (error) => {
     if (error.response && error.response.status === 401) {
       localStorage.clear();
-      window.location.href = "/login";
+      setTimeout(() => {
+        window.location.href = "/login";
+      }, 1000);
     }
     return Promise.reject(error);
   }

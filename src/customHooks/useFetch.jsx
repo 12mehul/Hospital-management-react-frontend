@@ -5,12 +5,18 @@ import authFetch from "../axiosbase/custom";
 export const useFetch = (url) => {
   const toast = useToast();
   const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const getData = async () => {
     try {
+      setLoading(true);
       const response = await authFetch(url);
-      setData(response.data);
+      if (response.data) {
+        setLoading(false);
+        setData(response.data);
+      }
     } catch (error) {
+      setLoading(false);
       toast.error(error.response?.data.msg || error.message);
     }
   };
@@ -18,5 +24,5 @@ export const useFetch = (url) => {
   useEffect(() => {
     getData();
   }, [url]);
-  return { data };
+  return { data, loading };
 };

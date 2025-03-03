@@ -4,7 +4,7 @@ import doctorImg from "../assets/img/doctor-profile.jpg";
 import { useFetch } from "../customHooks/useFetch";
 
 const BookAppointment = () => {
-  const { data } = useFetch("/speciality");
+  const { data, loading } = useFetch("/speciality");
 
   const [step, setStep] = useState(1);
 

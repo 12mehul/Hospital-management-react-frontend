@@ -4,7 +4,7 @@ import logo from "../assets/img/logo.png";
 import { useFetch } from "../customHooks/useFetch";
 
 const DoctorRegister = () => {
-  const { data } = useFetch("/speciality");
+  const { data, loading } = useFetch("/speciality");
 
   const [step, setStep] = useState(1);
 
