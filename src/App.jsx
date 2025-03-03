@@ -9,33 +9,36 @@ import BookAppointment from "./pages/BookAppointment";
 import AppointmentLists from "./pages/AppointmentLists";
 import PatientLists from "./pages/PatientLists";
 import { AuthProvider } from "./context/AuthContext";
+import { ToastProvider } from "./context/ToastProvider";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Public Routes - No AuthProvider */}
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/patientRegister" element={<PatientRegister />} />
-        <Route path="/doctorRegister" element={<DoctorRegister />} />
+    <ToastProvider>
+      <BrowserRouter>
+        <Routes>
+          {/* Public Routes - No AuthProvider */}
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/patientRegister" element={<PatientRegister />} />
+          <Route path="/doctorRegister" element={<DoctorRegister />} />
 
-        {/* Protected Routes Wrapped in AuthProvider */}
-        <Route
-          path="/"
-          element={
-            <AuthProvider>
-              <Layout />
-            </AuthProvider>
-          }
-        >
-          <Route path="appointment" element={<BookAppointment />} />
-          <Route path="appointment/lists" element={<AppointmentLists />} />
-          <Route path="patients" element={<PatientLists />} />
-          <Route path="profile" element={<Profile />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+          {/* Protected Routes Wrapped in AuthProvider */}
+          <Route
+            path="/"
+            element={
+              <AuthProvider>
+                <Layout />
+              </AuthProvider>
+            }
+          >
+            <Route path="appointment" element={<BookAppointment />} />
+            <Route path="appointment/lists" element={<AppointmentLists />} />
+            <Route path="patients" element={<PatientLists />} />
+            <Route path="profile" element={<Profile />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ToastProvider>
   );
 }
 

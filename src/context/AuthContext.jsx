@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import adminFetch from "../axiosbase/interceptors";
-import { showErrorToast } from "../toastContainer/Toastify";
 
 // Create Auth Context
 const AuthContext = createContext();
@@ -10,10 +9,11 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUserProfile = async () => {
     try {
+      if (user) return;
       const response = await adminFetch.get("/accounts/profile");
       setUser(response.data);
     } catch (error) {
-      showErrorToast(error.response?.data.msg);
+      console.log(error.response?.data.msg);
     }
   };
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/img/logo.png";
 import authFetch from "../axiosbase/custom";
-import { showErrorToast, showSuccessToast } from "../toastContainer/Toastify";
+import { useToast } from "../context/ToastProvider";
 import Loader from "../common/Loader";
 import { validateField } from "../utils/validation";
 
@@ -23,6 +23,7 @@ const initialValues = {
 };
 
 const PatientRegister = () => {
+  const toast = useToast();
   const [step, setStep] = useState(1);
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
@@ -91,7 +92,7 @@ const PatientRegister = () => {
       const res = await authFetch.post("/patients", data);
       if (res.status === 201) {
         setLoader(false);
-        showSuccessToast(res.data.msg);
+        toast.success(res.data.msg);
         setFormValues(initialValues);
         setTimeout(() => {
           window.location.href = "/login";
@@ -99,7 +100,7 @@ const PatientRegister = () => {
       }
     } catch (error) {
       setLoader(false);
-      showErrorToast(error.response?.data.msg);
+      toast.error(error.response?.data.msg);
     }
   };
 

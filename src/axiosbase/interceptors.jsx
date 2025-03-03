@@ -22,13 +22,13 @@ adminFetch.interceptors.request.use(
 
 adminFetch.interceptors.response.use(
   (response) => {
-    if (response.status == 401) {
-      localStorage.clear();
-      window.location.href = "/login";
-    }
     return response;
   },
   (error) => {
+    if (error.response && error.response.status === 401) {
+      localStorage.clear();
+      window.location.href = "/login";
+    }
     return Promise.reject(error);
   }
 );

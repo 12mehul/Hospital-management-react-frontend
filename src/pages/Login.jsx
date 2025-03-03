@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import logo from "../assets/img/logo.png";
 import { emailRegex } from "../regularExpressions/regex";
 import authFetch from "../axiosbase/custom";
-import { showErrorToast, showSuccessToast } from "../toastContainer/Toastify";
+import { useToast } from "../context/ToastProvider";
 import Loader from "../common/Loader";
 
 const initialValues = { email: "", password: "" };
 
 const Login = () => {
+  const toast = useToast();
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [loader, setLoader] = useState(false);
@@ -55,7 +56,7 @@ const Login = () => {
       const res = await authFetch.post("/accounts/login", formValues);
       if (res.status === 200) {
         setLoader(false);
-        showSuccessToast(res.data.msg);
+        toast.success(res.data.msg);
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("id", res.data.userId);
         localStorage.setItem("role", res.data.role);
@@ -66,7 +67,7 @@ const Login = () => {
       }
     } catch (error) {
       setLoader(false);
-      showErrorToast(error.response?.data.msg);
+      toast.error(error.response?.data.msg);
     }
   };
 
