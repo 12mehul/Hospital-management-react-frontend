@@ -1,11 +1,14 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import adminFetch from "../axiosbase/interceptors";
+import { useToast } from "./ToastProvider";
 
 // Create Auth Context
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  const toast = useToast();
   const [user, setUser] = useState(null);
+  const [error, setError] = useState(null);
 
   const fetchUserProfile = async () => {
     try {
@@ -13,7 +16,7 @@ export const AuthProvider = ({ children }) => {
       const response = await adminFetch.get("/accounts/profile");
       setUser(response.data);
     } catch (error) {
-      console.log(error.response?.data.msg);
+      setError(error.response?.data.msg);
     }
   };
 
@@ -21,8 +24,14 @@ export const AuthProvider = ({ children }) => {
     fetchUserProfile();
   }, []);
 
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
+
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
+    <AuthContext.Provider value={{ user, setUser, error }}>
       {children}
     </AuthContext.Provider>
   );
