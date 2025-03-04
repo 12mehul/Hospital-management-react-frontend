@@ -4,10 +4,10 @@ function ToastDanger({ message, onClose }) {
   return (
     <div
       id="toast-danger"
-      className="fixed top-4 right-4 flex items-center w-full max-w-xs p-4 mb-4 bg-red-300 rounded-lg shadow-md shadow-red-400/50 z-50"
+      className="fixed top-4 right-4 flex items-center w-full max-w-xs p-4 mb-4 bg-rose-300 rounded-lg shadow-md shadow-rose-400/50 z-50"
       aria-roledescription="alert"
     >
-      <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg">
+      <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-rose-500 bg-rose-100 rounded-lg">
         <svg
           className="w-5 h-5"
           aria-hidden="true"
@@ -19,10 +19,10 @@ function ToastDanger({ message, onClose }) {
         </svg>
         <span className="sr-only">Error icon</span>
       </div>
-      <div className="ml-3 text-base font-normal text-red-900">{message}</div>
+      <div className="ml-3 text-base font-normal text-rose-900">{message}</div>
       <button
         type="button"
-        className="ml-auto -mx-1.5 -my-1.5 cursor-pointer bg-red-100 text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8"
+        className="ml-auto -mx-1.5 -my-1.5 cursor-pointer bg-rose-100 text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8"
         data-dismiss-target="#toast-success"
         aria-label="Close"
         onClick={onClose}

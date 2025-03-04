@@ -77,29 +77,31 @@ const BookAppointment = () => {
           {/* <!-- Step 2: Doctors --> */}
           {step === 2 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-              <div className="bg-white shadow-md rounded-lg p-4 flex flex-col transform transition duration-500 hover:scale-105 hover:shadow-sky-600">
-                <div className="flex justify-between items-center">
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 capitalize">
-                      {/* ${val.firstName + " " + val.lastName} */}lastName
-                    </h3>
-                    <p className="text-gray-600 text-base mb-4 break-all">
-                      {/* ${val.specializationId?.title} */}lastName
-                    </p>
+              <div className="bg-white shadow-md rounded-lg p-4 flex flex-col transform transition duration-500 hover:scale-105 hover:shadow-sky-600 group">
+                <div className="flex flex-col">
+                  <div className="flex items-center justify-between my-3">
+                    <div className="relative w-full h-[4rem] flex items-center justify-end border-l-4 border-sky-600 rounded-tr-full rounded-br-full bg-sky-100">
+                      <img
+                        className="absolute right-2 z-30 w-12 h-12 rounded-full border-2 border-gray-200"
+                        src={doctorImg}
+                        alt="Profile"
+                      />
+                    </div>
                   </div>
-                  <img
-                    src={doctorImg}
-                    alt="Profile"
-                    className="w-12 rounded-full mb-4 shadow-md"
-                  />
-                </div>
-                <div className="flex w-full">
-                  <button
-                    className="px-4 cursor-pointer py-2 rounded-md flex-1 mx-1 font-medium text-white bg-sky-500 shadow-lg shadow-sky-500/50 hover:bg-sky-400"
-                    type="button"
-                  >
-                    Book Appointment
-                  </button>
+                  <h2 className="pl-4 text-xl font-semibold capitalize">
+                    {/* ${val.firstName + " " + val.lastName} */}lastName
+                  </h2>
+                  <p className="pl-4 text-gray-800 mb-3 break-all">
+                    {/* ${val.specializationId?.title} */}lastName
+                  </p>
+                  <div className="flex w-full">
+                    <button
+                      className="px-4 cursor-pointer py-2 rounded-md flex-1 mx-1 font-medium text-white bg-sky-500 shadow-lg shadow-sky-500/50 hover:bg-sky-400"
+                      type="button"
+                    >
+                      Book Appointment
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

@@ -2,11 +2,13 @@ import React from "react";
 
 const Loader = () => {
   return (
-    <div
-      className="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-white-800 rounded-full"
-      role="status"
-      aria-label="loading"
-    ></div>
+    <div>
+      <img
+        className="w-6 h-6 animate-spin"
+        src="https://www.svgrepo.com/show/70469/loading.svg"
+        alt="Loading icon"
+      ></img>
+    </div>
   );
 };
 

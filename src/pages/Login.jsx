@@ -72,18 +72,22 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-cover bg-[url('./assets/img/patient-bg.jpg')]">
+    <div className="relative h-screen bg-gray-50">
+      <div className="absolute top-20 left-2 w-[500px] h-[500px] bg-[#00A8FF80] rounded-full mix-blend-multiply filter blur-[150px] opacity-70 animate-blob"></div>
+      <div className="absolute top-20 right-32 w-[500px] h-[500px] bg-[#0097E680] rounded-full mix-blend-multiply filter blur-[150px] opacity-70 animate-blob animation-delay-2000"></div>
+      <div className="hidden xl:block absolute bottom-10 left-32 w-[500px] h-[500px] bg-[#0097E680] rounded-full mix-blend-multiply filter blur-[150px] opacity-70 animate-blob animation-delay-4000"></div>
+      <div className="absolute bottom-10 right-52 w-[500px] h-[500px] bg-[#87CEFA80] rounded-full mix-blend-multiply filter blur-[150px] opacity-70 animate-blob animation-delay-4000"></div>
       <div className="w-full h-screen flex flex-col">
         <div className="w-full flex justify-end p-4">
           <Link
-            className="text-xl font-semibold text-blue-800 hover:text-red-600"
+            className="text-lg font-medium text-blue-800 hover:text-rose-600"
             to="/"
           >
             Home ↩️
           </Link>
         </div>
         <div className="flex-grow flex items-center justify-center">
-          <div className="max-w-lg w-full bg-sky-50 p-8 rounded-2xl shadow-lg shadow-sky-200/50">
+          <div className="max-w-lg w-full bg-sky-100 p-8 rounded-2xl shadow-lg shadow-sky-200/50">
             <div className="flex items-center justify-center">
               <img src={logo} alt="logo" className="w-20 h-20" />
             </div>
