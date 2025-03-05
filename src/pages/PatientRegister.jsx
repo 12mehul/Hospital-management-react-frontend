@@ -105,32 +105,30 @@ const PatientRegister = () => {
   };
 
   return (
-    <div className="relative h-screen bg-gray-50">
-      <div className="absolute top-20 left-2 w-[500px] h-[500px] bg-[#00A8FF80] rounded-full mix-blend-multiply filter blur-[150px] opacity-70 animate-blob"></div>
-      <div className="absolute top-20 right-32 w-[500px] h-[500px] bg-[#0097E680] rounded-full mix-blend-multiply filter blur-[150px] opacity-70 animate-blob animation-delay-2000"></div>
-      <div className="hidden xl:block absolute bottom-10 left-32 w-[500px] h-[500px] bg-[#0097E680] rounded-full mix-blend-multiply filter blur-[150px] opacity-70 animate-blob animation-delay-4000"></div>
-      <div className="absolute bottom-10 right-52 w-[500px] h-[500px] bg-[#87CEFA80] rounded-full mix-blend-multiply filter blur-[150px] opacity-70 animate-blob animation-delay-4000"></div>
+    <div className="bg-cover bg-[url('./assets/img/bg-img.PNG')]">
       <div className="w-full h-screen flex flex-col">
-        <div className="w-full flex justify-end p-4">
-          <Link
-            className="text-lg font-medium text-blue-800 hover:text-rose-600"
-            to="/"
-          >
-            Home ↩️
+        <div className="w-full p-4">
+          <Link to="/" className="flex justify-start items-center">
+            <img src={logo} alt="logo" className="w-8 h-8" />
+            <span className="text-base font-medium text-blue-600 hover:text-blue-500">
+              Home
+            </span>
           </Link>
         </div>
         <div className="flex-grow flex items-center justify-center">
-          <div className="max-w-2xl w-full h-auto bg-sky-100 p-3 rounded-2xl shadow-lg shadow-sky-200/50">
+          <div className="max-w-2xl w-full h-auto bg-[#d7f4f9] p-3 rounded-2xl shadow-lg shadow-sky-200/50">
             <div className="flex items-center justify-center">
-              <img src={logo} alt="logo" className="w-20 h-20" />
+              <img src={logo} alt="logo" className="w-18 h-18" />
             </div>
-            <h2 className="mb-3 flex items-center justify-center text-3xl font-semibold text-blue-800">
-              Patient Registration
+            <h2 className="relative flex items-center text-3xl font-semibold text-blue-800 mb-2">
+              <span className="flex-grow border-t border-gray-400"></span>
+              <span className="mx-3 text-center">Registration</span>
+              <span className="flex-grow border-t border-gray-400"></span>
             </h2>
             <form onSubmit={handleSubmit} noValidate>
               {/* <!-- Step 1 --> */}
               {step === 1 && (
-                <div className="flex flex-col gap-4">
+                <div className="py-3 flex flex-col gap-4">
                   <div className="flex flex-col md:flex-row gap-3">
                     <div className="w-full">
                       <input
@@ -138,7 +136,7 @@ const PatientRegister = () => {
                         className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
                           formErrors.firstName
                             ? "border border-red-500"
-                            : "border-2 border-cyan-100 border-b-cyan-300"
+                            : "border-2 border-cyan-300"
                         }`}
                         placeholder="Enter your first name"
                         name="firstName"
@@ -156,7 +154,7 @@ const PatientRegister = () => {
                         className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
                           formErrors.lastName
                             ? "border border-red-500"
-                            : "border-2 border-cyan-100 border-b-cyan-300"
+                            : "border-2 border-cyan-300"
                         }`}
                         placeholder="Enter your last name"
                         name="lastName"
@@ -175,7 +173,7 @@ const PatientRegister = () => {
                       className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
                         formErrors.email
                           ? "border border-red-500"
-                          : "border-2 border-cyan-100 border-b-cyan-300"
+                          : "border-2 border-cyan-300"
                       }`}
                       placeholder="Enter your email"
                       name="email"
@@ -194,7 +192,7 @@ const PatientRegister = () => {
                         className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
                           formErrors.password
                             ? "border border-red-500"
-                            : "border-2 border-cyan-100 border-b-cyan-300"
+                            : "border-2 border-cyan-300"
                         }`}
                         placeholder="Enter your password"
                         name="password"
@@ -212,7 +210,7 @@ const PatientRegister = () => {
                         className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
                           formErrors.confirmPassword
                             ? "border border-red-500"
-                            : "border-2 border-cyan-100 border-b-cyan-300"
+                            : "border-2 border-cyan-300"
                         }`}
                         placeholder="Enter your confirm password"
                         name="confirmPassword"
@@ -229,14 +227,14 @@ const PatientRegister = () => {
               )}
               {/* <!-- Step 2 --> */}
               {step === 2 && (
-                <div className="flex flex-col gap-4">
+                <div className="py-3 flex flex-col gap-4">
                   <div>
                     <input
                       type="date"
                       className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
                         formErrors.dob
                           ? "border border-red-500"
-                          : "border-2 border-cyan-100 border-b-cyan-300"
+                          : "border-2 border-cyan-300"
                       }`}
                       placeholder="Enter your dob"
                       name="dob"
@@ -251,7 +249,7 @@ const PatientRegister = () => {
                       className={`w-full flex gap-3 p-3 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
                         formErrors.gender
                           ? "border border-red-500"
-                          : "border-2 border-cyan-100 border-b-cyan-300"
+                          : "border-2 border-cyan-300"
                       }`}
                     >
                       <div className="flex items-center justify-center gap-3">
@@ -299,7 +297,7 @@ const PatientRegister = () => {
                       className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
                         formErrors.phone
                           ? "border border-red-500"
-                          : "border-2 border-cyan-100 border-b-cyan-300"
+                          : "border-2 border-cyan-300"
                       }`}
                       placeholder="Enter your phone"
                       name="phone"
@@ -315,14 +313,14 @@ const PatientRegister = () => {
               )}
               {/* <!-- Step 3 --> */}
               {step === 3 && (
-                <div className="flex flex-col gap-4">
+                <div className="py-3 flex flex-col gap-4">
                   <div>
                     <input
                       type="text"
                       className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
                         formErrors.addressLine
                           ? "border border-red-500"
-                          : "border-2 border-cyan-100 border-b-cyan-300"
+                          : "border-2 border-cyan-300"
                       }`}
                       placeholder="Enter your address"
                       name="addressLine"
@@ -341,7 +339,7 @@ const PatientRegister = () => {
                         className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
                           formErrors.city
                             ? "border border-red-500"
-                            : "border-2 border-cyan-100 border-b-cyan-300"
+                            : "border-2 border-cyan-300"
                         }`}
                         placeholder="Enter your city"
                         name="city"
@@ -359,7 +357,7 @@ const PatientRegister = () => {
                         className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
                           formErrors.state
                             ? "border border-red-500"
-                            : "border-2 border-cyan-100 border-b-cyan-300"
+                            : "border-2 border-cyan-300"
                         }`}
                         placeholder="Enter your state"
                         name="state"
@@ -379,7 +377,7 @@ const PatientRegister = () => {
                         className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
                           formErrors.country
                             ? "border border-red-500"
-                            : "border-2 border-cyan-100 border-b-cyan-300"
+                            : "border-2 border-cyan-300"
                         }`}
                         placeholder="Enter your country"
                         name="country"
@@ -397,7 +395,7 @@ const PatientRegister = () => {
                         className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
                           formErrors.pincode
                             ? "border border-red-500"
-                            : "border-2 border-cyan-100 border-b-cyan-300"
+                            : "border-2 border-cyan-300"
                         }`}
                         placeholder="Enter your pincode"
                         name="pincode"
@@ -415,7 +413,7 @@ const PatientRegister = () => {
               <div
                 className={`flex ${
                   step === 1 ? "justify-end" : "justify-between"
-                } my-5`}
+                }`}
               >
                 {step > 1 && (
                   <button

@@ -72,29 +72,26 @@ const Login = () => {
   };
 
   return (
-    <div className="relative h-screen bg-gray-50">
-      <div className="absolute top-20 left-2 w-[500px] h-[500px] bg-[#00A8FF80] rounded-full mix-blend-multiply filter blur-[150px] opacity-70 animate-blob"></div>
-      <div className="absolute top-20 right-32 w-[500px] h-[500px] bg-[#0097E680] rounded-full mix-blend-multiply filter blur-[150px] opacity-70 animate-blob animation-delay-2000"></div>
-      <div className="hidden xl:block absolute bottom-10 left-32 w-[500px] h-[500px] bg-[#0097E680] rounded-full mix-blend-multiply filter blur-[150px] opacity-70 animate-blob animation-delay-4000"></div>
-      <div className="absolute bottom-10 right-52 w-[500px] h-[500px] bg-[#87CEFA80] rounded-full mix-blend-multiply filter blur-[150px] opacity-70 animate-blob animation-delay-4000"></div>
+    <div className="bg-cover bg-[url('./assets/img/bg-img.PNG')]">
       <div className="w-full h-screen flex flex-col">
-        <div className="w-full flex justify-end p-4">
-          <Link
-            className="text-lg font-medium text-blue-800 hover:text-rose-600"
-            to="/"
-          >
-            Home ↩️
+        <div className="w-full p-4">
+          <Link to="/" className="flex justify-start items-center">
+            <img src={logo} alt="logo" className="w-8 h-8" />
+            <span className="text-base font-medium text-blue-600 hover:text-blue-500">
+              Home
+            </span>
           </Link>
         </div>
         <div className="flex-grow flex items-center justify-center">
-          <div className="max-w-lg w-full bg-sky-100 p-8 rounded-2xl shadow-lg shadow-sky-200/50">
+          <div className="max-w-lg w-full bg-[#d7f4f9] p-8 rounded-2xl shadow-lg shadow-sky-200/50">
             <div className="flex items-center justify-center">
-              <img src={logo} alt="logo" className="w-20 h-20" />
+              <img src={logo} alt="logo" className="w-16 h-16" />
             </div>
-            <h2 className="flex items-start text-3xl font-semibold text-blue-800">
-              Login Form
+            <h2 className="relative flex items-center text-3xl font-semibold text-blue-800 mb-2">
+              <span className="flex-grow border-t border-gray-400"></span>
+              <span className="mx-3 text-center">Login</span>
+              <span className="flex-grow border-t border-gray-400"></span>
             </h2>
-            <p className="mb-1 text-slate-500">Hi, Welcome back 👋</p>
             <form onSubmit={handleSubmit} noValidate>
               <div className="py-3 flex flex-col gap-4">
                 <div>
@@ -103,7 +100,7 @@ const Login = () => {
                     className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
                       formErrors.email
                         ? "border border-red-500"
-                        : "border-2 border-cyan-100 border-b-cyan-300"
+                        : "border-2 border-cyan-300"
                     }`}
                     placeholder="Enter your email"
                     name="email"
@@ -119,7 +116,7 @@ const Login = () => {
                     className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
                       formErrors.password
                         ? "border border-red-500"
-                        : "border-2 border-cyan-100 border-b-cyan-300"
+                        : "border-2 border-cyan-300"
                     }`}
                     placeholder="Enter your password"
                     name="password"

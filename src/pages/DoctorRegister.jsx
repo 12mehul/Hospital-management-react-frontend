@@ -17,33 +17,35 @@ const DoctorRegister = () => {
   };
 
   return (
-    <div className="bg-cover bg-[url('./assets/img/patient-bg.jpg')]">
+    <div className="bg-cover bg-[url('./assets/img/bg-img.PNG')]">
       <div className="w-full h-screen flex flex-col">
-        <div className="w-full flex justify-end p-4">
-          <Link
-            className="text-xl font-semibold text-blue-800 hover:text-red-600"
-            to="/"
-          >
-            Home ↩️
+        <div className="w-full p-4">
+          <Link to="/" className="flex justify-start items-center">
+            <img src={logo} alt="logo" className="w-8 h-8" />
+            <span className="text-base font-medium text-blue-600 hover:text-blue-500">
+              Home
+            </span>
           </Link>
         </div>
         <div className="flex-grow flex items-center justify-center">
-          <div className="max-w-2xl w-full h-auto bg-sky-50 p-3 rounded-2xl shadow-lg shadow-sky-200/50">
+          <div className="max-w-2xl w-full h-auto bg-[#d7f4f9] p-3 rounded-2xl shadow-lg shadow-sky-200/50">
             <div className="flex items-center justify-center">
-              <img src={logo} alt="logo" className="w-20 h-20" />
+              <img src={logo} alt="logo" className="w-18 h-18" />
             </div>
-            <h2 className="mb-3 flex items-center justify-center text-3xl font-semibold text-blue-800">
-              Doctor Registration
+            <h2 className="relative flex items-center text-3xl font-semibold text-blue-800 mb-2">
+              <span className="flex-grow border-t border-gray-400"></span>
+              <span className="mx-3 text-center">Dr. Registration</span>
+              <span className="flex-grow border-t border-gray-400"></span>
             </h2>
             <form>
               {/* <!-- Step 1 --> */}
               {step === 1 && (
-                <div className="flex flex-col gap-4">
+                <div className="py-3 flex flex-col gap-4">
                   <div className="flex flex-col md:flex-row gap-3">
                     <div className="w-full">
                       <input
                         type="text"
-                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
                         placeholder="Enter your first name"
                         name="firstName"
                       />
@@ -52,7 +54,7 @@ const DoctorRegister = () => {
                     <div className="w-full">
                       <input
                         type="text"
-                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
                         placeholder="Enter your last name"
                         name="lastName"
                       />
@@ -62,27 +64,17 @@ const DoctorRegister = () => {
                   <div>
                     <input
                       type="email"
-                      className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                      className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
                       placeholder="Enter your email"
                       name="email"
                     />
-                    <span className="pl-2 text-red-500"></span>
-                  </div>
-                  <div>
-                    <select
-                      className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
-                      name="specializationId"
-                      id="specialization"
-                    >
-                      <option value="">Select Speciality</option>
-                    </select>
                     <span className="pl-2 text-red-500"></span>
                   </div>
                   <div className="flex flex-col md:flex-row gap-3">
                     <div className="w-full">
                       <input
                         type="password"
-                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
                         placeholder="Enter your password"
                         name="password"
                       />
@@ -91,7 +83,7 @@ const DoctorRegister = () => {
                     <div className="w-full">
                       <input
                         type="password"
-                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
                         placeholder="Enter your confirm password"
                         name="confirmPassword"
                       />
@@ -102,21 +94,22 @@ const DoctorRegister = () => {
               )}
               {/* <!-- Step 2 --> */}
               {step === 2 && (
-                <div className="flex flex-col gap-4">
+                <div className="py-3 flex flex-col gap-4">
                   <div className="flex flex-col md:flex-row gap-3">
                     <div className="w-full">
-                      <input
-                        type="text"
-                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
-                        placeholder="Enter your experience"
-                        name="experience"
-                      />
+                      <select
+                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                        name="specializationId"
+                        id="specialization"
+                      >
+                        <option value="">Select Speciality</option>
+                      </select>
                       <span className="pl-2 text-red-500"></span>
                     </div>
                     <div className="w-full">
                       <input
                         type="text"
-                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
                         placeholder="Enter your license number"
                         name="licenseNumber"
                       />
@@ -126,65 +119,76 @@ const DoctorRegister = () => {
                   <div className="flex flex-col md:flex-row gap-3">
                     <div className="w-full">
                       <input
-                        type="date"
-                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
-                        placeholder="Enter your dob"
-                        name="dob"
+                        type="text"
+                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                        placeholder="Enter your experience"
+                        name="experience"
                       />
                       <span className="pl-2 text-red-500"></span>
                     </div>
                     <div className="w-full">
                       <input
                         type="text"
-                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
                         placeholder="Enter your phone"
                         name="phone"
                       />
                       <span className="pl-2 text-red-500"></span>
                     </div>
                   </div>
-                  <div>
-                    <div className="w-full flex gap-3 p-3 border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md">
-                      <div className="flex items-center justify-center gap-3">
-                        <input
-                          type="radio"
-                          name="gender"
-                          value="male"
-                          className="accent-blue-300 focus:accent-blue-500 w-4 h-4"
-                        />
-                        <label
-                          htmlFor="male"
-                          className="text-lg text-gray-700 font-normal"
-                        >
-                          Male
-                        </label>
-                      </div>
-                      <div className="flex items-center justify-center gap-3">
-                        <input
-                          type="radio"
-                          name="gender"
-                          value="female"
-                          className="accent-blue-300 focus:accent-blue-500 w-4 h-4"
-                        />
-                        <label
-                          htmlFor="female"
-                          className="text-lg text-gray-700 font-normal"
-                        >
-                          Female
-                        </label>
-                      </div>
+                  <div className="flex flex-col md:flex-row gap-3">
+                    <div className="w-full">
+                      <input
+                        type="date"
+                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                        placeholder="Enter your dob"
+                        name="dob"
+                      />
+                      <span className="pl-2 text-red-500"></span>
                     </div>
-                    <span className="pl-2 text-red-500 empty:hidden"></span>
+                    <div className="w-full">
+                      <div className="w-full flex gap-3 p-3 border-2 border-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md">
+                        <div className="flex items-center justify-center gap-3">
+                          <input
+                            type="radio"
+                            name="gender"
+                            value="male"
+                            className="accent-blue-300 focus:accent-blue-500 w-4 h-4"
+                          />
+                          <label
+                            htmlFor="male"
+                            className="text-lg text-gray-700 font-normal"
+                          >
+                            Male
+                          </label>
+                        </div>
+                        <div className="flex items-center justify-center gap-3">
+                          <input
+                            type="radio"
+                            name="gender"
+                            value="female"
+                            className="accent-blue-300 focus:accent-blue-500 w-4 h-4"
+                          />
+                          <label
+                            htmlFor="female"
+                            className="text-lg text-gray-700 font-normal"
+                          >
+                            Female
+                          </label>
+                        </div>
+                      </div>
+                      <span className="pl-2 text-red-500 empty:hidden"></span>
+                    </div>
                   </div>
                 </div>
               )}
               {/* <!-- Step 3 --> */}
               {step === 3 && (
-                <div className="flex flex-col gap-4">
+                <div className="py-3 flex flex-col gap-4">
                   <div>
                     <input
                       type="text"
-                      className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                      className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
                       placeholder="Enter your address"
                       name="addressLine"
                     />
@@ -194,7 +198,7 @@ const DoctorRegister = () => {
                     <div className="w-full">
                       <input
                         type="text"
-                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
                         placeholder="Enter your city"
                         name="city"
                       />
@@ -203,7 +207,7 @@ const DoctorRegister = () => {
                     <div className="w-full">
                       <input
                         type="text"
-                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
                         placeholder="Enter your state"
                         name="state"
                       />
@@ -214,7 +218,7 @@ const DoctorRegister = () => {
                     <div className="w-full">
                       <input
                         type="text"
-                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
                         placeholder="Enter your country"
                         name="country"
                       />
@@ -223,7 +227,7 @@ const DoctorRegister = () => {
                     <div className="w-full">
                       <input
                         type="text"
-                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                        className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
                         placeholder="Enter your pincode"
                         name="pincode"
                       />
@@ -235,7 +239,7 @@ const DoctorRegister = () => {
               <div
                 className={`flex ${
                   step === 1 ? "justify-end" : "justify-between"
-                } my-5`}
+                }`}
               >
                 {step > 1 && (
                   <button
