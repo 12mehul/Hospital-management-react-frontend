@@ -3,6 +3,7 @@ import HeaderSection from "../components/HomePage/HeaderSection";
 import HomeSection from "../components/HomePage/HomeSection";
 import AppointmentSection from "../components/HomePage/AppointmentSection";
 import AboutSection from "../components/HomePage/AboutSection";
+import FooterSection from "../components/HomePage/FooterSection";
 
 const Home = () => {
   return (
@@ -11,24 +12,26 @@ const Home = () => {
       <HeaderSection />
 
       {/* <!-- Content Sections --> */}
-      <div className="mt-40">
+      <div>
         {/* <!-- Home --> */}
-        <section id="home">
+        <section id="home" className="pt-5">
           <HomeSection />
         </section>
 
         {/* <!-- Appointment --> */}
-        <section id="appointment">
+        <section id="appointment" className="pt-5">
           <AppointmentSection />
         </section>
 
-        {/* <!-- About Us --> */}
-        <section id="about">
+        {/* <!-- About --> */}
+        <section id="about" className="pt-5">
           <AboutSection />
         </section>
+
+        {/* <!-- Footer --> */}
+        <FooterSection />
       </div>
     </div>
   );
 };
-
 export default Home;

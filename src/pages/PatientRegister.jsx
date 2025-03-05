@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/img/logo.png";
+import logo from "../assets/img/logo.jpg";
 import authFetch from "../axiosbase/custom";
 import { useToast } from "../context/ToastProvider";
 import Loader from "../common/Loader";
@@ -108,8 +108,8 @@ const PatientRegister = () => {
     <div className="bg-cover bg-[url('./assets/img/bg-img.PNG')]">
       <div className="w-full h-screen flex flex-col">
         <div className="w-full p-4">
-          <Link to="/" className="flex justify-start items-center">
-            <img src={logo} alt="logo" className="w-8 h-8" />
+          <Link to="/" className="flex gap-2 justify-start items-center">
+            <img src={logo} alt="logo" className="w-9 h-9 rounded-lg" />
             <span className="text-base font-medium text-blue-600 hover:text-blue-500">
               Home
             </span>
@@ -117,8 +117,8 @@ const PatientRegister = () => {
         </div>
         <div className="flex-grow flex items-center justify-center">
           <div className="max-w-2xl w-full h-auto bg-[#d7f4f9] p-3 rounded-2xl shadow-lg shadow-sky-200/50">
-            <div className="flex items-center justify-center">
-              <img src={logo} alt="logo" className="w-18 h-18" />
+            <div className="flex items-center justify-center mb-2">
+              <img src={logo} alt="logo" className="w-18 h-18 rounded-lg" />
             </div>
             <h2 className="relative flex items-center text-3xl font-semibold text-blue-800 mb-2">
               <span className="flex-grow border-t border-gray-400"></span>

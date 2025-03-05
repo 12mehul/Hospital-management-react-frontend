@@ -1,83 +1,87 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/img/logo.png";
+import logo from "../../assets/img/logo.jpg";
 
 const HeaderSection = () => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 w-full mx-auto bg-sky-50 p-4 rounded-xl shadow-lg shadow-sky-200/50 z-50">
-      <div className="w-full flex justify-between">
-        <div className="flex gap-2 items-start">
-          <img src={logo} alt="logo" className="w-16 h-16" />
-          <h2 className="flex items-start text-2xl font-semibold text-blue-800">
-            HealthCare Wellness Center
-          </h2>
+    <header className="sticky top-0 bg-white shadow">
+      <div className="container flex flex-col gap-2 sm:flex-row justify-between items-center mx-auto py-4 px-8">
+        <div className="flex items-center gap-2">
+          <img src={logo} alt="logo" className="w-18 h-18 rounded-lg" />
+        </div>
+        <div className="flex items-center space-x-6">
+          <a
+            href="#home"
+            className="relative text-gray-700 font-medium hover:text-sky-600 transition duration-300 group"
+          >
+            Home
+            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-sky-600 transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a
+            href="#appointment"
+            className="relative text-gray-700 font-medium hover:text-sky-600 transition duration-300 group"
+          >
+            Appointment
+            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-sky-600 transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a
+            href="#about"
+            className="relative text-gray-700 font-medium hover:text-sky-600 transition duration-300 group"
+          >
+            About
+            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-sky-600 transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a
+            href="#contact"
+            className="relative text-gray-700 font-medium hover:text-sky-600 transition duration-300 group"
+          >
+            Contact
+            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-sky-600 transition-all duration-300 group-hover:w-full"></span>
+          </a>
         </div>
         <div className="flex flex-col md:flex-row gap-2">
           <div className="relative">
             <button
               onClick={() => setShowDropdown(!showDropdown)}
-              className="w-20 py-2 cursor-pointer font-medium text-white bg-sky-500 shadow-lg shadow-sky-500/50 hover:bg-sky-400 rounded-xl inline-flex space-x-2 items-center justify-center focus:outline-none"
+              className="w-32 px-4 py-2 cursor-pointer font-semibold text-white bg-sky-600 rounded-xl shadow-lg shadow-sky-300/50 transition-all duration-300 ease-in-out transform hover:bg-sky-500 hover:shadow-xl hover:-translate-y-1 active:scale-95 flex items-center justify-center space-x-2"
               type="button"
             >
-              Register
+              <span>Registration</span>
             </button>
             {showDropdown && (
-              <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg block">
+              <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-lg shadow-lg block z-50">
                 <Link
                   to="/patientRegister"
-                  className="block px-2 py-2 text-gray-800 hover:bg-gray-100 hover:text-blue-500"
+                  className="block text-center px-2 py-2 text-gray-800 hover:bg-gray-100 hover:text-blue-500"
                 >
-                  Patient Registration
+                  Patient
                 </Link>
+                {/* Horizontal Divider */}
+                <div className="w-28 h-px bg-gray-400 mx-2"></div>
                 <Link
                   to="/doctorRegister"
-                  className="block px-2 py-2 text-gray-800 hover:bg-gray-100 hover:text-blue-500"
+                  className="block text-center px-2 py-2 text-gray-800 hover:bg-gray-100 hover:text-blue-500"
                 >
-                  Doctor Registration
+                  Doctor
                 </Link>
               </div>
             )}
           </div>
+          {/* Vertical Divider */}
+          <div className="hidden md:block w-px h-10 bg-gray-400"></div>
+          {/* Horizontal Divider */}
+          <div className="block md:hidden w-28 h-px bg-gray-400"></div>
           <Link to="/login">
             <button
-              className="w-20 py-2 cursor-pointer font-medium text-white bg-sky-500 shadow-lg shadow-sky-500/50 hover:bg-sky-400 rounded-xl inline-flex space-x-2 items-center justify-center"
+              className="w-28 px-4 py-2 cursor-pointer font-semibold text-white bg-sky-600 rounded-xl shadow-lg shadow-sky-300/50 transition-all duration-300 ease-in-out transform hover:bg-sky-500 hover:shadow-xl hover:-translate-y-1 active:scale-95 flex items-center justify-center space-x-2"
               type="button"
             >
-              Login
+              <span>Login</span>
             </button>
           </Link>
         </div>
-      </div>
-      <div className="mt-2 md:mt-0 w-full flex items-center justify-center">
-        <ul className="p-2 flex gap-4 text-2xl font-semibold bg-white rounded-md shadow-md shadow-sky-300/50">
-          <li>
-            <a
-              className="menu-link text-gray-700 hover:text-blue-500 hover:border-b-2 hover:border-cyan-500 rounded-b-md"
-              aria-current="page"
-              href="#home"
-            >
-              Home
-            </a>
-          </li>
-          <li>
-            <a
-              className="menu-link text-gray-700 hover:text-blue-500 hover:border-b-2 hover:border-cyan-500 rounded-b-md"
-              href="#appointment"
-            >
-              Appointment
-            </a>
-          </li>
-          <li>
-            <a
-              className="menu-link text-gray-700 hover:text-blue-500 hover:border-b-2 hover:border-cyan-500 rounded-b-md"
-              href="#about"
-            >
-              About Us
-            </a>
-          </li>
-        </ul>
       </div>
     </header>
   );
