@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import specialityImg from "../assets/img/speciality-icon.jpeg";
+import specialityImg from "../assets/img/img-1.png";
 import doctorImg from "../assets/img/doctor-profile.jpg";
 import { useFetch } from "../customHooks/useFetch";
 
@@ -61,25 +61,30 @@ const BookAppointment = () => {
         <form>
           {/* <!-- Step 1: Speciality --> */}
           {step === 1 && (
-            <>
-              <ul className="grid grid-cols-1 gap-8 px-1 md:grid-cols-2 lg:grid-cols-3 md:p-2 xl:p-4">
-                <li className="flex w-full gap-2 p-2 bg-slate-50 border border-gray-600 rounded hover:transition shadow-md hover:border-sky-800 hover:shadow-sky-600 cursor-pointer">
+            <div className="mt-2 grid gap-6 px-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:p-2 xl:p-4">
+              <div className="mx-auto w-64 h-72 p-5 flex flex-col items-center justify-center gap-y-10 bg-white rounded-xl shadow-md shadow-gray-300 cursor-pointer transition transform duration-500 hover:scale-105 hover:shadow-blue-500 hover:transition">
+                <div className="flex items-center justify-center border border-transparent bg-slate-100 p-4 rounded-full">
                   <img
                     src={specialityImg}
                     alt="speciality"
-                    className="w-16 h-16 rounded-full border-2 border-red-500 object-cover"
+                    className="w-32 h-32 rounded-full object-cover"
                   />
-                  <h2 className="pl-2 pt-1 font-semibold md:text-xl text-black">
-                    {/* ${val.title} */}Dentist
-                  </h2>
-                </li>
-              </ul>
-            </>
+                </div>
+                <div className="text-center">
+                  <label className="text-2xl font-bold tracking-wide text-black block">
+                    {/* ${val.title} */}Cardiology
+                  </label>
+                  <label className="text-sm font-medium tracking-wide text-slate-500 block">
+                    20+ Doctors
+                  </label>
+                </div>
+              </div>
+            </div>
           )}
           {/* <!-- Step 2: Doctors --> */}
           {step === 2 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-              <div className="bg-white shadow-md rounded-lg p-4 flex flex-col transform transition duration-500 hover:scale-105 hover:shadow-sky-600 group">
+            <div className="mt-2 grid gap-6 px-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:p-2 xl:p-4">
+              <div className="p-4 flex flex-col bg-white rounded-xl shadow-md shadow-gray-300 transition transform duration-500 hover:scale-105 hover:shadow-blue-500 hover:transition">
                 <div className="flex flex-col">
                   <div className="flex items-center justify-between my-3">
                     <div className="relative w-full h-[4rem] flex items-center justify-end border-l-4 border-sky-600 rounded-tr-full rounded-br-full bg-sky-100">
@@ -100,6 +105,7 @@ const BookAppointment = () => {
                     <button
                       className="px-4 cursor-pointer py-2 rounded-md flex-1 mx-1 font-medium text-white bg-sky-500 shadow-lg shadow-sky-500/50 hover:bg-sky-400"
                       type="button"
+                      onClick={nextStep}
                     >
                       Book Appointment
                     </button>
@@ -110,16 +116,29 @@ const BookAppointment = () => {
           )}
           {/* <!-- Step 3: Slots --> */}
           {step === 3 && (
-            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-4">
-              <div className="flex gap-4 items-center justify-center border rounded-lg shadow-md transform transition duration-500 hover:scale-105 p-2">
-                <span className="text-xl">📅</span>
-                <div>
-                  <h5 className="text-xl font-semibold tracking-tight text-gray-900">
-                    {/* ${new Date(val.date).toLocaleDateString()} */}lastName
-                  </h5>
-                  <h5 className="text-lg font-medium tracking-tight text-blue-600">
-                    {/* ${val.time} */}lastName
-                  </h5>
+            <div className="mt-2 grid gap-6 px-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:p-2 xl:p-4">
+              <div
+                className="p-4 flex items-center bg-white rounded-xl shadow-md shadow-gray-300 cursor-pointer transition transform duration-500 hover:scale-105 hover:shadow-blue-500 hover:transition"
+                onClick={nextStep}
+              >
+                <div className="bg-blue-600 p-3 rounded-full text-center">
+                  <p className="text-xl font-semibold text-white">05</p>
+                </div>
+                <div className="ml-4">
+                  <div className="uppercase px-2 rounded-md text-white bg-green-400 font-semibold">
+                    Paid
+                  </div>
+                  <p className="mt-2 text-gray-800">
+                    DATE:
+                    {/* ${new Date(val.date).toLocaleDateString()} */}2024-07-25
+                  </p>
+                  <p className="mt-2 text-gray-700">
+                    TIME:
+                    {/* ${val.time} */}07:45 AM
+                  </p>
+                  <p className="mt-2 font-semibold text-gray-600">
+                    AMOUNT: Rs. 500/-
+                  </p>
                 </div>
               </div>
             </div>

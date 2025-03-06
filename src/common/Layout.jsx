@@ -1,13 +1,10 @@
 import React from "react";
-import Header from "./Header";
 import Sidebar from "./Sidebar";
 import { Outlet } from "react-router-dom";
 
 const Layout = () => {
   return (
     <div className="flex flex-col h-screen">
-      {/* Header */}
-      {/* <Header /> */}
       {/* Main Content */}
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}

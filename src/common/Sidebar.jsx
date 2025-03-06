@@ -2,6 +2,8 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import logo from "../assets/img/logo.jpg";
+import doctorImg from "../assets/img/doctorProfile.jpg";
+import patientImg from "../assets/img/patientProfile.jpg";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -11,11 +13,10 @@ const Sidebar = () => {
 
   return (
     <aside className="w-64 bg-white shadow-md">
-      <div className="p-4 flex items-center">
+      <div className="p-4 flex items-center bg-gradient-to-r from-blue-600 to-indigo-500">
         <img src={logo} alt="logo" className="h-12 w-12 rounded-lg" />
       </div>
-      <div className="w-60 h-px bg-gray-400 mx-2"></div>
-      <nav className="mt-5 px-2">
+      <nav className="mt-4 px-2">
         {role === "patient" && (
           <div>
             <span className="flex items-center p-2 text-base font-medium rounded-md hover:bg-indigo-100 hover:text-indigo-600">
@@ -65,7 +66,6 @@ const Sidebar = () => {
           <span className="flex-1 ml-3 whitespace-nowrap">Patient Lists</span>
         </Link>
         <button className="mt-1 w-full flex items-center p-2 text-base font-medium rounded-md text-gray-600 hover:bg-red-100 hover:text-rose-600">
-          {/* <FaSignOutAlt className="text-xl" /> */}
           <span className="ml-3">Logout</span>
         </button>
       </nav>
@@ -80,8 +80,8 @@ const Sidebar = () => {
           }`}
         >
           <img
-            className="h-8 w-8 rounded-full"
-            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            className="h-10 w-10 rounded-full"
+            src={role === "doctor" ? doctorImg : patientImg}
             alt="User"
           />
           <div className="ml-3">
