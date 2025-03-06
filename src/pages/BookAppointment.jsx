@@ -18,15 +18,17 @@ const BookAppointment = () => {
 
   return (
     <>
-      <h2 className="flex items-center justify-center text-2xl font-semibold text-gray-700 uppercase">
-        Find Doctor & Book An Appointment
-      </h2>
+      <div className="p-2 bg-white rounded-lg shadow-md">
+        <h2 className="flex items-center justify-center text-2xl font-bold text-gray-700 uppercase">
+          Find Doctor & Book An Appointment
+        </h2>
+      </div>
       <div className="p-1">
         <div className="mt-2 mb-2 flex justify-end">
           {step > 1 && (
             <div className="w-full flex p-3">
               <span
-                className="text-xl cursor-pointer font-semibold text-blue-800 hover:text-red-600"
+                className="text-lg cursor-pointer font-medium text-blue-800 hover:text-rose-600"
                 onClick={prevStep}
               >
                 Back ↩️

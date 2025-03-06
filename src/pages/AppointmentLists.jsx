@@ -3,9 +3,11 @@ import React from "react";
 const AppointmentLists = () => {
   return (
     <>
-      <h2 className="pb-5 flex items-center justify-center text-2xl font-semibold text-gray-700 uppercase">
-        Appointment Lists
-      </h2>
+      <div className="p-2 bg-white rounded-lg shadow-md mb-5">
+        <h2 className="flex items-center justify-center text-2xl font-bold text-gray-700 uppercase">
+          Appointment Lists
+        </h2>
+      </div>
       <div className="flex flex-col">
         <div className="overflow-x-auto">
           <div className="min-w-full inline-block align-middle">
