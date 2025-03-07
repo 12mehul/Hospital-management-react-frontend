@@ -1,5 +1,5 @@
 import React from "react";
-import doctorImg from "../../assets/img/doctor.png";
+import doctorImg from "../../assets/img/doctor_home.jpg";
 
 const HomeSection = () => {
   return (
@@ -20,8 +20,12 @@ const HomeSection = () => {
             </p>
           </div>
         </div>
-        <div className="mt-10 lg:mt-0 w-full lg:w-1/2 undefined">
-          <img src={doctorImg} alt="logo" className="rounded-md" />
+        <div className="mt-10 lg:mt-0 w-full lg:w-1/2 flex items-center justify-end">
+          <img
+            src={doctorImg}
+            alt="logo"
+            className="rounded-full shadow-lg shadow-gray-300 w-lg"
+          />
         </div>
       </div>
     </>

@@ -1,5 +1,5 @@
 import React from "react";
-import aboutImg from "../../assets/img/about.png";
+import aboutImg from "../../assets/img/about_home.jpg";
 
 const AboutSection = () => {
   return (
@@ -22,8 +22,12 @@ const AboutSection = () => {
             </p>
           </div>
         </div>
-        <div className="mt-10 lg:mt-0 w-full lg:w-1/2 undefined">
-          <img src={aboutImg} alt="logo" className="rounded-md" />
+        <div className="mt-10 lg:mt-0 w-full lg:w-1/2 flex items-center justify-end">
+          <img
+            src={aboutImg}
+            alt="logo"
+            className="rounded-lg shadow-lg shadow-gray-300 w-lg"
+          />
         </div>
       </div>
     </>

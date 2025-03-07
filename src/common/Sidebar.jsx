@@ -1,9 +1,13 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+// image
 import logo from "../assets/img/logo.jpg";
-import doctorImg from "../assets/img/doctorProfile.jpg";
-import patientImg from "../assets/img/patientProfile.jpg";
+import numberIcon from "../assets/icon/id_number-icon.jpg";
+import bookedAppIcon from "../assets/icon/book_appointment-icon.jpg";
+import appointmentIcon from "../assets/icon/appointment_list-icon.jpg";
+import patientIcon from "../assets/icon/patient_list-icon.jpg";
+import profileIcon from "../assets/icon/profile-icon.jpg";
 import logoutIcon from "../assets/icon/logout-icon.jpg";
 
 const Sidebar = () => {
@@ -87,7 +91,7 @@ const Sidebar = () => {
         >
           <img
             className="h-10 w-10 rounded-full"
-            src={role === "doctor" ? doctorImg : patientImg}
+            src={profileIcon}
             alt="User"
           />
           <div className="ml-3">

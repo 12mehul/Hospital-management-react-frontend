@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import appointmentImg from "../../assets/img/appointment.png";
+import appointmentImg from "../../assets/img/appointment_booking_home.jpg";
 
 const AppointmentSection = () => {
   return (
@@ -29,8 +29,12 @@ const AppointmentSection = () => {
             </Link>
           </div>
         </div>
-        <div className="mt-10 lg:mt-0 w-full lg:w-1/2 order-last lg:order-first">
-          <img src={appointmentImg} alt="logo" className="rounded-md" />
+        <div className="mt-10 lg:mt-0 w-full lg:w-1/2 flex items-center justify-start order-last lg:order-first">
+          <img
+            src={appointmentImg}
+            alt="logo"
+            className="rounded-lg shadow-lg shadow-gray-300 w-lg"
+          />
         </div>
       </div>
     </>
