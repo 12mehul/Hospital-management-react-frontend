@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import logo from "../assets/img/logo.jpg";
 import doctorImg from "../assets/img/doctorProfile.jpg";
 import patientImg from "../assets/img/patientProfile.jpg";
+import logoutIcon from "../assets/icon/logout-icon.jpg";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -65,7 +66,12 @@ const Sidebar = () => {
           <span className="text-xl">🧑‍⚕️</span>
           <span className="flex-1 ml-3 whitespace-nowrap">Patient Lists</span>
         </Link>
-        <button className="mt-1 w-full flex items-center p-2 text-base font-medium rounded-md text-gray-600 hover:bg-red-100 hover:text-rose-600">
+        <button className="mt-1 w-full cursor-pointer flex items-center p-2 text-base font-medium rounded-md text-gray-600 hover:bg-red-100 hover:text-rose-600">
+          <img
+            src={logoutIcon}
+            alt="Logout"
+            className="w-8 h-8 rounded-full object-cover"
+          />
           <span className="ml-3">Logout</span>
         </button>
       </nav>

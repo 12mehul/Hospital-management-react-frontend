@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import specialityImg from "../assets/img/img-1.png";
-import doctorImg from "../assets/img/doctor-profile.jpg";
 import { useFetch } from "../customHooks/useFetch";
+// image
+import specialityImg from "../assets/img/cardio-img.png";
+import doctorImg from "../assets/img/doctor-img.jpg";
+import backIcon from "../assets/icon/back-icon.jpg";
 
 const BookAppointment = () => {
   const { data, loading } = useFetch("/speciality");
@@ -26,12 +28,17 @@ const BookAppointment = () => {
       <div className="p-1">
         <div className="mt-2 mb-2 flex justify-end">
           {step > 1 && (
-            <div className="w-full flex p-3">
+            <div className="w-full flex items-center justify-start gap-1">
+              <img
+                src={backIcon}
+                alt="Back"
+                className="w-8 h-8 rounded-full object-cover"
+              />
               <span
                 className="text-lg cursor-pointer font-medium text-blue-800 hover:text-rose-600"
                 onClick={prevStep}
               >
-                Back ↩️
+                Back
               </span>
             </div>
           )}
