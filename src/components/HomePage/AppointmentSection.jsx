@@ -21,7 +21,7 @@ const AppointmentSection = () => {
             </p>
             <Link to="/appointment" className="flex items-start my-5">
               <button
-                className="w-40 py-2 font-medium text-white bg-sky-500 shadow-lg shadow-sky-500/50 hover:bg-sky-400 rounded-xl inline-flex space-x-2 items-center justify-center"
+                className="w-40 py-2 cursor-pointer font-medium text-white bg-sky-600 shadow-lg shadow-sky-500/50 hover:bg-sky-500 rounded-xl inline-flex space-x-2 items-center justify-center"
                 type="button"
               >
                 Book Appointment

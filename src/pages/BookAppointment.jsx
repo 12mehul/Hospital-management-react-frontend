@@ -110,7 +110,7 @@ const BookAppointment = () => {
                   </p>
                   <div className="flex w-full">
                     <button
-                      className="px-4 cursor-pointer py-2 rounded-md flex-1 mx-1 font-medium text-white bg-sky-500 shadow-lg shadow-sky-500/50 hover:bg-sky-400"
+                      className="px-4 cursor-pointer py-2 rounded-md flex-1 mx-1 font-medium text-white bg-sky-600 shadow-lg shadow-sky-500/50 hover:bg-sky-500"
                       type="button"
                       onClick={nextStep}
                     >
@@ -178,7 +178,7 @@ const BookAppointment = () => {
             <div className="flex justify-end mt-4">
               <button
                 type="submit"
-                className="w-40 cursor-pointer py-3 font-medium text-white bg-blue-500 shadow-lg shadow-blue-500/50 hover:bg-blue-400 rounded-xl inline-flex space-x-2 items-center justify-center"
+                className="w-40 cursor-pointer py-3 font-medium text-white bg-sky-600 shadow-lg shadow-sky-500/50 hover:bg-sky-500 rounded-xl inline-flex space-x-2 items-center justify-center"
               >
                 Submit
               </button>

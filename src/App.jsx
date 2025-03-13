@@ -10,33 +10,36 @@ import AppointmentLists from "./pages/AppointmentLists";
 import PatientLists from "./pages/PatientLists";
 import { AuthProvider } from "./context/AuthContext";
 import { ToastProvider } from "./context/ToastProvider";
+import ProtectedRoutes from "./routes/ProtectedRoutes";
 
 function App() {
   return (
     <ToastProvider>
       <BrowserRouter>
-        <Routes>
-          {/* Public Routes - No AuthProvider */}
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/patientRegister" element={<PatientRegister />} />
-          <Route path="/doctorRegister" element={<DoctorRegister />} />
+        <ProtectedRoutes>
+          <Routes>
+            {/* Public Routes - No AuthProvider */}
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/patientRegister" element={<PatientRegister />} />
+            <Route path="/doctorRegister" element={<DoctorRegister />} />
 
-          {/* Protected Routes Wrapped in AuthProvider */}
-          <Route
-            path="/"
-            element={
-              <AuthProvider>
-                <Layout />
-              </AuthProvider>
-            }
-          >
-            <Route path="appointment" element={<BookAppointment />} />
-            <Route path="appointment/lists" element={<AppointmentLists />} />
-            <Route path="patients" element={<PatientLists />} />
-            <Route path="profile" element={<Profile />} />
-          </Route>
-        </Routes>
+            {/* Protected Routes Wrapped in AuthProvider */}
+            <Route
+              path="/*"
+              element={
+                <AuthProvider>
+                  <Layout />
+                </AuthProvider>
+              }
+            >
+              <Route path="appointment" element={<BookAppointment />} />
+              <Route path="appointment/lists" element={<AppointmentLists />} />
+              <Route path="patients" element={<PatientLists />} />
+              <Route path="profile" element={<Profile />} />
+            </Route>
+          </Routes>
+        </ProtectedRoutes>
       </BrowserRouter>
     </ToastProvider>
   );

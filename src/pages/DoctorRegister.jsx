@@ -244,7 +244,7 @@ const DoctorRegister = () => {
               >
                 {step > 1 && (
                   <button
-                    className="w-40 cursor-pointer py-3 font-medium text-white bg-blue-500 shadow-lg shadow-blue-500/50 hover:bg-blue-400 rounded-xl inline-flex space-x-2 items-center justify-center"
+                    className="w-40 cursor-pointer py-3 font-medium text-white bg-sky-600 shadow-lg shadow-sky-500/50 hover:bg-sky-500 rounded-xl inline-flex space-x-2 items-center justify-center"
                     type="button"
                     onClick={prevStep}
                   >
@@ -253,7 +253,7 @@ const DoctorRegister = () => {
                 )}
                 {step < 3 && (
                   <button
-                    className="w-40 cursor-pointer py-3 font-medium text-white bg-blue-500 shadow-lg shadow-blue-500/50 hover:bg-blue-400 rounded-xl inline-flex space-x-2 items-center justify-center"
+                    className="w-40 cursor-pointer py-3 font-medium text-white bg-sky-600 shadow-lg shadow-sky-500/50 hover:bg-sky-500 rounded-xl inline-flex space-x-2 items-center justify-center"
                     type="button"
                     onClick={nextStep}
                   >
@@ -262,7 +262,7 @@ const DoctorRegister = () => {
                 )}
                 {step === 3 && (
                   <button
-                    className="w-40 cursor-pointer py-3 font-medium text-white bg-blue-500 shadow-lg shadow-blue-500/50 hover:bg-blue-400 rounded-xl inline-flex space-x-2 items-center justify-center"
+                    className="w-40 cursor-pointer py-3 font-medium text-white bg-sky-600 shadow-lg shadow-sky-500/50 hover:bg-sky-500 rounded-xl inline-flex space-x-2 items-center justify-center"
                     type="submit"
                   >
                     <LeftArrowBoxIcon />
