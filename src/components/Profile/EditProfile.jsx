@@ -1,0 +1,198 @@
+import React, { useState } from "react";
+import { useToast } from "../../context/ToastProvider";
+import Loader from "../../common/Loader";
+import adminFetch from "../../axiosbase/interceptors";
+// image
+import { LeftArrowBoxIcon } from "../../assets/SVGIcons";
+import doctorProfile from "../../assets/img/doctorProfile.jpg";
+import patientProfile from "../../assets/img/patientProfile.jpg";
+import backIcon from "../../assets/icon/back-icon.jpg";
+
+const EditProfile = ({ user, setUser, handleClick }) => {
+  const toast = useToast();
+  const [loader, setLoader] = useState(false);
+  const role = localStorage.getItem("role");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser((prev) => {
+      // Check if the field belongs to fullAddress
+      if (prev.fullAddress.hasOwnProperty(name)) {
+        return {
+          ...prev,
+          fullAddress: { ...prev.fullAddress, [name]: value },
+        };
+      } else {
+        return {
+          ...prev,
+          [name]: value, // Update other fields normally
+        };
+      }
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoader(true);
+
+    try {
+      const res = await adminFetch.put("/accounts/update", user);
+      if (res.data) {
+        setLoader(false);
+        toast.success(res.data.msg);
+        setTimeout(() => handleClick("details"), 1000);
+      }
+    } catch (error) {
+      setLoader(false);
+      toast.error(error.response?.data.msg || error.message);
+    }
+  };
+
+  return (
+    <div className="max-w-4xl w-full h-auto p-10 bg-white rounded-2xl font-normal leading-relaxed shadow-md shadow-gray-300 transition transform duration-500 hover:scale-105 hover:shadow-blue-400 hover:transition">
+      <div className="flex items-start justify-between">
+        <div
+          className="flex items-center gap-2 cursor-pointer"
+          onClick={() => handleClick("details")}
+        >
+          <img
+            src={backIcon}
+            alt="Back"
+            className="w-8 h-8 rounded-full object-cover"
+          />
+          <span className="text-lg font-medium text-blue-800 hover:text-rose-600">
+            Back
+          </span>
+        </div>
+        <h2 className="w-3/5 text-xl font-semibold text-blue-800">
+          Welcome,{" "}
+          {role === "patient"
+            ? "Patient"
+            : role === "doctor"
+            ? "Doctor"
+            : "User"}
+          . Edit your profile here
+        </h2>
+      </div>
+      <form onSubmit={handleSubmit}>
+        {user && (
+          <div className="mt-3 flex flex-col md:flex-row">
+            <div className="md:w-1/3 text-center mb-8 md:mb-0">
+              <img
+                src={role === "doctor" ? doctorProfile : patientProfile}
+                alt="Profile Picture"
+                className="rounded-full w-48 h-48 mx-auto mb-4 border-4 border-sky-600 transition-transform duration-300 hover:scale-105 ring ring-gray-300"
+              />
+            </div>
+            <div className="md:w-2/3 md:pl-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
+                <input
+                  type="text"
+                  className="w-full p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                  placeholder="Enter first name"
+                  name="firstName"
+                  value={user.firstName}
+                  onChange={handleChange}
+                />
+                <input
+                  type="text"
+                  className="w-full p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                  placeholder="Enter last name"
+                  name="lastName"
+                  value={user.lastName}
+                  onChange={handleChange}
+                />
+                {role === "doctor" && (
+                  <>
+                    <input
+                      type="text"
+                      className="w-full p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                      placeholder="Enter experience"
+                      name="experience"
+                      value={user.experience}
+                      onChange={handleChange}
+                    />
+                    <input
+                      type="text"
+                      className="w-full p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                      placeholder="Enter license number"
+                      name="licenseNumber"
+                      value={user.licenseNumber}
+                      onChange={handleChange}
+                    />
+                  </>
+                )}
+              </div>
+              <input
+                type="text"
+                className="w-full mb-3 p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                placeholder="Enter phone"
+                name="phone"
+                value={user.phone}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                className="w-full mb-3 p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                placeholder="Enter address"
+                name="addressLine"
+                value={user.fullAddress.addressLine}
+                onChange={handleChange}
+              />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
+                <input
+                  type="text"
+                  className="w-full p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                  placeholder="Enter city"
+                  name="city"
+                  value={user.fullAddress.city}
+                  onChange={handleChange}
+                />
+                <input
+                  type="text"
+                  className="w-full p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                  placeholder="Enter state"
+                  name="state"
+                  value={user.fullAddress.state}
+                  onChange={handleChange}
+                />
+                <input
+                  type="text"
+                  className="w-full p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                  placeholder="Enter country"
+                  name="country"
+                  value={user.fullAddress.country}
+                  onChange={handleChange}
+                />
+                <input
+                  type="text"
+                  className="w-full p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                  placeholder="Enter pincode"
+                  name="pincode"
+                  value={user.fullAddress.pincode}
+                  onChange={handleChange}
+                />
+              </div>
+              <button
+                className="w-full py-3 cursor-pointer font-medium text-white bg-sky-600 shadow-lg shadow-sky-500/50 hover:bg-sky-500 rounded-xl inline-flex space-x-2 items-center justify-center"
+                type="submit"
+                disabled={loader}
+              >
+                {loader ? (
+                  <Loader />
+                ) : (
+                  <>
+                    <LeftArrowBoxIcon />
+                    <span>Submit</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        )}
+      </form>
+    </div>
+  );
+};
+
+export default EditProfile;
