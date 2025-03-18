@@ -34,9 +34,16 @@ const ProfileDetails = ({ user, handleClick }) => {
                   <h2 className="text-xl font-semibold text-indigo-800 mb-4">
                     Specialization
                   </h2>
-                  <p className="text-gray-600 mb-4">
-                    {user.specializationId.title}
-                  </p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {user.specializationId.map((s) => (
+                      <div
+                        key={s._id}
+                        className="flex items-center bg-blue-100 border border-cyan-500 rounded-xl px-3 py-1"
+                      >
+                        <span className="text-sm">{s.title}</span>
+                      </div>
+                    ))}
+                  </div>
 
                   <h2 className="text-xl font-semibold text-indigo-800 mb-4">
                     Experience & License

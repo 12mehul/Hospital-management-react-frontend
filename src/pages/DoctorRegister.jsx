@@ -6,16 +6,10 @@ import { LeftArrowBoxIcon, UpperArrowSquareIcon } from "../assets/SVGIcons";
 
 const DoctorRegister = () => {
   const { data, loading } = useFetch("/speciality");
-
   const [step, setStep] = useState(1);
 
-  const nextStep = () => {
-    setStep(step + 1);
-  };
-
-  const prevStep = () => {
-    setStep(step - 1);
-  };
+  const prevStep = () => setStep(step - 1);
+  const nextStep = () => setStep(step + 1);
 
   return (
     <div className="bg-cover bg-[url('./assets/img/bg-img.PNG')]">

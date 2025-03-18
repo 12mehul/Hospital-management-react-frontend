@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useToast } from "../../context/ToastProvider";
 import Loader from "../../common/Loader";
 import adminFetch from "../../axiosbase/interceptors";
+import { useFetch } from "../../customHooks/useFetch";
 // image
-import { LeftArrowBoxIcon } from "../../assets/SVGIcons";
+import { CloseIcon, LeftArrowBoxIcon } from "../../assets/SVGIcons";
 import doctorProfile from "../../assets/img/doctorProfile.jpg";
 import patientProfile from "../../assets/img/patientProfile.jpg";
 import backIcon from "../../assets/icon/back-icon.jpg";
@@ -12,23 +13,45 @@ const EditProfile = ({ user, setUser, handleClick }) => {
   const toast = useToast();
   const [loader, setLoader] = useState(false);
   const role = localStorage.getItem("role");
+  const { data: specialities } =
+    role === "doctor" ? useFetch("/speciality") : { data: null };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUser((prev) => {
-      // Check if the field belongs to fullAddress
-      if (prev.fullAddress.hasOwnProperty(name)) {
-        return {
+    setUser((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleAddressChange = (e) => {
+    const { name, value } = e.target;
+    setUser((prev) => ({
+      ...prev,
+      fullAddress: { ...prev.fullAddress, [name]: value },
+    }));
+  };
+
+  const handleSpecialtySelect = (e) => {
+    const selectedId = e.target.value;
+    if (
+      selectedId &&
+      !user.specializationId.some((s) => s._id === selectedId)
+    ) {
+      const selectedSpecialty = specialities?.specialities.find(
+        (s) => s._id === selectedId
+      );
+      if (selectedSpecialty) {
+        setUser((prev) => ({
           ...prev,
-          fullAddress: { ...prev.fullAddress, [name]: value },
-        };
-      } else {
-        return {
-          ...prev,
-          [name]: value, // Update other fields normally
-        };
+          specializationId: [...prev.specializationId, selectedSpecialty],
+        }));
       }
-    });
+    }
+  };
+
+  const removeSpecialty = (id) => {
+    setUser((prev) => ({
+      ...prev,
+      specializationId: prev.specializationId.filter((s) => s._id !== id),
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -102,8 +125,10 @@ const EditProfile = ({ user, setUser, handleClick }) => {
                   value={user.lastName}
                   onChange={handleChange}
                 />
-                {role === "doctor" && (
-                  <>
+              </div>
+              {role === "doctor" && (
+                <>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                     <input
                       type="text"
                       className="w-full p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
@@ -120,9 +145,44 @@ const EditProfile = ({ user, setUser, handleClick }) => {
                       value={user.licenseNumber}
                       onChange={handleChange}
                     />
-                  </>
-                )}
-              </div>
+                  </div>
+                  <select
+                    className="w-full mb-3 p-2 text-lg text-gray-700 font-normal border-2 border-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                    onChange={handleSpecialtySelect}
+                  >
+                    <option value="">Select Speciality</option>
+                    {specialities?.specialities.map((s) => (
+                      <option
+                        key={s._id}
+                        value={s._id}
+                        disabled={user.specializationId.some(
+                          (spec) => spec._id === s._id
+                        )}
+                      >
+                        {s.title}
+                      </option>
+                    ))}
+                  </select>
+                  {/* Selected Specialties as Chips */}
+                  <div className="flex flex-wrap gap-2 mb-3">
+                    {user.specializationId.map((s) => (
+                      <div
+                        key={s._id}
+                        className="flex items-center bg-blue-100 border border-cyan-500 rounded-xl px-3 py-1"
+                      >
+                        <span className="text-sm">{s.title}</span>
+                        <button
+                          type="button"
+                          className="ml-2 cursor-pointer text-gray-600 hover:text-rose-600"
+                          onClick={() => removeSpecialty(s._id)}
+                        >
+                          <CloseIcon />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
               <input
                 type="text"
                 className="w-full mb-3 p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
@@ -137,7 +197,7 @@ const EditProfile = ({ user, setUser, handleClick }) => {
                 placeholder="Enter address"
                 name="addressLine"
                 value={user.fullAddress.addressLine}
-                onChange={handleChange}
+                onChange={handleAddressChange}
               />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                 <input
@@ -146,7 +206,7 @@ const EditProfile = ({ user, setUser, handleClick }) => {
                   placeholder="Enter city"
                   name="city"
                   value={user.fullAddress.city}
-                  onChange={handleChange}
+                  onChange={handleAddressChange}
                 />
                 <input
                   type="text"
@@ -154,7 +214,7 @@ const EditProfile = ({ user, setUser, handleClick }) => {
                   placeholder="Enter state"
                   name="state"
                   value={user.fullAddress.state}
-                  onChange={handleChange}
+                  onChange={handleAddressChange}
                 />
                 <input
                   type="text"
@@ -162,7 +222,7 @@ const EditProfile = ({ user, setUser, handleClick }) => {
                   placeholder="Enter country"
                   name="country"
                   value={user.fullAddress.country}
-                  onChange={handleChange}
+                  onChange={handleAddressChange}
                 />
                 <input
                   type="text"
@@ -170,7 +230,7 @@ const EditProfile = ({ user, setUser, handleClick }) => {
                   placeholder="Enter pincode"
                   name="pincode"
                   value={user.fullAddress.pincode}
-                  onChange={handleChange}
+                  onChange={handleAddressChange}
                 />
               </div>
               <button

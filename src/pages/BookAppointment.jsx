@@ -1,22 +1,16 @@
 import React, { useState } from "react";
-import { useFetch } from "../customHooks/useFetch";
+import { useAdminFetch } from "../customHooks/useAdminFetch";
 // image
 import specialityImg from "../assets/img/cardio-img.png";
 import doctorImg from "../assets/img/doctor-img.jpg";
 import backIcon from "../assets/icon/back-icon.jpg";
 
 const BookAppointment = () => {
-  const { data, loading } = useFetch("/speciality");
-
+  const { data, loading } = useAdminFetch("/speciality/count");
   const [step, setStep] = useState(1);
 
-  const nextStep = () => {
-    setStep(step + 1);
-  };
-
-  const prevStep = () => {
-    setStep(step - 1);
-  };
+  const prevStep = () => setStep(step - 1);
+  const nextStep = () => setStep(step + 1);
 
   return (
     <>

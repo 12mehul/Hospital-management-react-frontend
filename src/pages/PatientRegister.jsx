@@ -47,13 +47,10 @@ const PatientRegister = () => {
     return Object.keys(errors).length === 0;
   };
 
+  const prevStep = () => setStep(step - 1);
   const nextStep = () => {
     if (!validateForm()) return;
     setStep(step + 1);
-  };
-
-  const prevStep = () => {
-    setStep(step - 1);
   };
 
   const handleInputChange = (e) => {
