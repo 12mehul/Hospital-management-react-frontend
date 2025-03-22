@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAdminFetch } from "../customHooks/useAdminFetch";
 // image
-import specialityImg from "../assets/img/cardio-img.png";
+import cardioImg from "../assets/icon/speciality/cardio_vascular-icon.jpg";
 import doctorImg from "../assets/img/doctor-img.jpg";
 import backIcon from "../assets/icon/back-icon.jpg";
 
@@ -66,7 +66,7 @@ const BookAppointment = () => {
               <div className="mx-auto w-64 h-72 p-5 flex flex-col items-center justify-center gap-y-10 bg-white rounded-xl shadow-md shadow-gray-300 cursor-pointer transition transform duration-500 hover:scale-105 hover:shadow-blue-500 hover:transition">
                 <div className="flex items-center justify-center border border-transparent bg-slate-100 p-4 rounded-full">
                   <img
-                    src={specialityImg}
+                    src={cardioImg}
                     alt="speciality"
                     className="w-32 h-32 rounded-full object-cover"
                   />
