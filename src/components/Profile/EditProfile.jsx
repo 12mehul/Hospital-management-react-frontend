@@ -183,14 +183,30 @@ const EditProfile = ({ user, setUser, handleClick }) => {
                   </div>
                 </>
               )}
-              <input
-                type="text"
-                className="w-full mb-3 p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
-                placeholder="Enter phone"
-                name="phone"
-                value={user.phone}
-                onChange={handleChange}
-              />
+              <div
+                className={`grid grid-cols-1 gap-3 mb-3 ${
+                  role === "doctor" ? "md:grid-cols-2" : ""
+                }`}
+              >
+                {role === "doctor" && (
+                  <input
+                    type="number"
+                    className="w-full p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                    placeholder="Enter fees"
+                    name="fees"
+                    value={user.fees}
+                    onChange={handleChange}
+                  />
+                )}
+                <input
+                  type="text"
+                  className="w-full p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                  placeholder="Enter phone"
+                  name="phone"
+                  value={user.phone}
+                  onChange={handleChange}
+                />
+              </div>
               <input
                 type="text"
                 className="w-full mb-3 p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"

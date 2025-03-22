@@ -51,6 +51,11 @@ const ProfileDetails = ({ user, handleClick }) => {
                   <p className="text-gray-700 mb-6">
                     {user.experience} / License No: {user.licenseNumber}
                   </p>
+
+                  <h2 className="text-xl font-semibold text-indigo-800 mb-4">
+                    Fees
+                  </h2>
+                  <p className="text-gray-700 mb-6">{user.fees} Rs</p>
                 </>
               )}
               <h2 className="text-xl font-semibold text-indigo-800 mb-4">
