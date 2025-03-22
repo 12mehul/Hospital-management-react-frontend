@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { useAdminFetch } from "../customHooks/useAdminFetch";
-// image
-import cardioImg from "../assets/icon/speciality/cardio_vascular-icon.jpg";
 import doctorImg from "../assets/img/doctor-img.jpg";
 import backIcon from "../assets/icon/back-icon.jpg";
+import SpecialityLists from "../components/BookAppointment/SpecialityLists";
 
 const BookAppointment = () => {
-  const { data, loading } = useAdminFetch("/speciality/count");
   const [step, setStep] = useState(1);
+  const [selectedSpeciality, setSelectedSpeciality] = useState(null);
+  const [selectedDoctor, setSelectedDoctor] = useState(null);
+  const [selectedSlot, setSelectedSlot] = useState(null);
+  const [selectedPatient, setSelectedPatient] = useState(null);
 
   const prevStep = () => setStep(step - 1);
   const nextStep = () => setStep(step + 1);
@@ -62,25 +63,10 @@ const BookAppointment = () => {
         <form>
           {/* <!-- Step 1: Speciality --> */}
           {step === 1 && (
-            <div className="mt-2 grid gap-6 px-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:p-2 xl:p-4">
-              <div className="mx-auto w-64 h-72 p-5 flex flex-col items-center justify-center gap-y-10 bg-white rounded-xl shadow-md shadow-gray-300 cursor-pointer transition transform duration-500 hover:scale-105 hover:shadow-blue-500 hover:transition">
-                <div className="flex items-center justify-center border border-transparent bg-slate-100 p-4 rounded-full">
-                  <img
-                    src={cardioImg}
-                    alt="speciality"
-                    className="w-32 h-32 rounded-full object-cover"
-                  />
-                </div>
-                <div className="text-center">
-                  <label className="text-2xl font-bold tracking-wide text-black block">
-                    {/* ${val.title} */}Cardiology
-                  </label>
-                  <label className="text-sm font-medium tracking-wide text-slate-500 block">
-                    20+ Doctors
-                  </label>
-                </div>
-              </div>
-            </div>
+            <SpecialityLists
+              setSelectedSpeciality={setSelectedSpeciality}
+              nextStep={nextStep}
+            />
           )}
           {/* <!-- Step 2: Doctors --> */}
           {step === 2 && (
