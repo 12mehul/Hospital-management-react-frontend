@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import doctorImg from "../assets/img/doctor-img.jpg";
 import backIcon from "../assets/icon/back-icon.jpg";
+import { useAdminFetch } from "../customHooks/useAdminFetch";
 import SpecialityLists from "../components/BookAppointment/SpecialityLists";
+import DoctorLists from "../components/BookAppointment/DoctorLists";
 
 const BookAppointment = () => {
   const [step, setStep] = useState(1);
@@ -9,6 +10,15 @@ const BookAppointment = () => {
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [selectedPatient, setSelectedPatient] = useState(null);
+  const [specializationId, setSpecializationId] = useState(null);
+
+  const { data: specialities, loading: loadingSpeciality } =
+    useAdminFetch("/speciality/count");
+  const { data: doctors, loading: loadingDoctor } = useAdminFetch(
+    selectedSpeciality
+      ? `/doctors?specializationId=${selectedSpeciality}`
+      : "/doctors"
+  );
 
   const prevStep = () => setStep(step - 1);
   const nextStep = () => setStep(step + 1);
@@ -54,7 +64,11 @@ const BookAppointment = () => {
                   ? "text-blue-800 underline"
                   : "text-black no-underline"
               }`}
-              onClick={() => setStep(2)}
+              onClick={() => {
+                setStep(2);
+                setSelectedSpeciality(null);
+                setSpecializationId(null);
+              }}
             >
               Doctors
             </span>
@@ -64,42 +78,27 @@ const BookAppointment = () => {
           {/* <!-- Step 1: Speciality --> */}
           {step === 1 && (
             <SpecialityLists
-              setSelectedSpeciality={setSelectedSpeciality}
-              nextStep={nextStep}
+              loading={loadingSpeciality}
+              data={specialities}
+              setSelectedSpeciality={(id) => {
+                setSelectedSpeciality(id);
+                setSpecializationId(id);
+                nextStep();
+              }}
             />
           )}
           {/* <!-- Step 2: Doctors --> */}
           {step === 2 && (
-            <div className="mt-2 grid gap-6 px-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:p-2 xl:p-4">
-              <div className="p-4 flex flex-col bg-white rounded-xl shadow-md shadow-gray-300 transition transform duration-500 hover:scale-105 hover:shadow-blue-500 hover:transition">
-                <div className="flex flex-col">
-                  <div className="flex items-center justify-between my-3">
-                    <div className="relative w-full h-[4rem] flex items-center justify-end border-l-4 border-sky-600 rounded-tr-full rounded-br-full bg-sky-100">
-                      <img
-                        className="absolute right-2 z-30 w-12 h-12 rounded-full border-2 border-gray-200"
-                        src={doctorImg}
-                        alt="Profile"
-                      />
-                    </div>
-                  </div>
-                  <h2 className="pl-4 text-xl font-semibold capitalize">
-                    {/* ${val.firstName + " " + val.lastName} */}lastName
-                  </h2>
-                  <p className="pl-4 text-gray-800 mb-3 break-all">
-                    {/* ${val.specializationId?.title} */}lastName
-                  </p>
-                  <div className="flex w-full">
-                    <button
-                      className="px-4 cursor-pointer py-2 rounded-md flex-1 mx-1 font-medium text-white bg-sky-600 shadow-lg shadow-sky-500/50 hover:bg-sky-500"
-                      type="button"
-                      onClick={nextStep}
-                    >
-                      Book Appointment
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <DoctorLists
+              loading={loadingDoctor}
+              data={doctors}
+              selectedSpeciality={selectedSpeciality}
+              setSpecializationId={(id) => {
+                setSpecializationId(id);
+                nextStep();
+              }}
+              setSelectedDoctor={setSelectedDoctor}
+            />
           )}
           {/* <!-- Step 3: Slots --> */}
           {step === 3 && (
