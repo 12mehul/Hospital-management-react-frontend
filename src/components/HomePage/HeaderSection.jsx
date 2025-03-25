@@ -12,33 +12,21 @@ const HeaderSection = () => {
           <img src={logo} alt="logo" className="w-18 h-18 rounded-lg" />
         </div>
         <div className="flex items-center space-x-6">
-          <a
-            href="#home"
-            className="relative text-gray-700 font-medium hover:text-sky-600 transition duration-300 group"
-          >
+          <a href="#home" className="common-anchor group">
             Home
-            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-sky-600 transition-all duration-300 group-hover:w-full"></span>
+            <span className="common-span"></span>
           </a>
-          <a
-            href="#appointment"
-            className="relative text-gray-700 font-medium hover:text-sky-600 transition duration-300 group"
-          >
+          <a href="#appointment" className="common-anchor group">
             Appointment
-            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-sky-600 transition-all duration-300 group-hover:w-full"></span>
+            <span className="common-span"></span>
           </a>
-          <a
-            href="#about"
-            className="relative text-gray-700 font-medium hover:text-sky-600 transition duration-300 group"
-          >
+          <a href="#about" className="common-anchor group">
             About
-            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-sky-600 transition-all duration-300 group-hover:w-full"></span>
+            <span className="common-span"></span>
           </a>
-          <a
-            href="#contact"
-            className="relative text-gray-700 font-medium hover:text-sky-600 transition duration-300 group"
-          >
+          <a href="#contact" className="common-anchor group">
             Contact
-            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-sky-600 transition-all duration-300 group-hover:w-full"></span>
+            <span className="common-span"></span>
           </a>
         </div>
         <div className="flex flex-col md:flex-row gap-2">

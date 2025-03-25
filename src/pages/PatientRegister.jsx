@@ -92,9 +92,7 @@ const PatientRegister = () => {
         setLoader(false);
         toast.success(res.data.msg);
         setFormValues(initialValues);
-        setTimeout(() => {
-          window.location.href = "/login";
-        }, 3000);
+        setTimeout(() => (window.location.href = "/login"), 3000);
       }
     } catch (error) {
       setLoader(false);

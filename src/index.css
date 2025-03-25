@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+.common-anchor {
+  @apply relative text-gray-700 font-medium hover:text-sky-600 transition duration-300;
+}
+
+.common-span {
+  @apply absolute left-0 bottom-0 w-0 h-0.5 bg-sky-600 transition-all duration-300 group-hover:w-full;
+}

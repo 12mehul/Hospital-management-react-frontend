@@ -26,9 +26,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
   const handleLogout = () => {
     toast.error("Logout Successfully!");
     localStorage.clear();
-    setTimeout(() => {
-      window.location.href = "/login";
-    }, 1000);
+    setTimeout(() => (window.location.href = "/login"), 1000);
   };
 
   return (

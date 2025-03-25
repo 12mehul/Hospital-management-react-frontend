@@ -62,9 +62,7 @@ const Login = () => {
         localStorage.setItem("id", res.data.userId);
         localStorage.setItem("role", res.data.role);
         setFormValues(initialValues);
-        setTimeout(() => {
-          window.location.href = "/appointment";
-        }, 3000);
+        setTimeout(() => (window.location.href = "/appointment"), 3000);
       }
     } catch (error) {
       setLoader(false);
