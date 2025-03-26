@@ -111,7 +111,7 @@ const EditProfile = ({ user, setUser, handleClick }) => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                 <input
                   type="text"
-                  className="w-full p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                  className="input-profile"
                   placeholder="Enter first name"
                   name="firstName"
                   value={user.firstName}
@@ -119,7 +119,7 @@ const EditProfile = ({ user, setUser, handleClick }) => {
                 />
                 <input
                   type="text"
-                  className="w-full p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                  className="input-profile"
                   placeholder="Enter last name"
                   name="lastName"
                   value={user.lastName}
@@ -131,7 +131,7 @@ const EditProfile = ({ user, setUser, handleClick }) => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                     <input
                       type="text"
-                      className="w-full p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                      className="input-profile"
                       placeholder="Enter experience"
                       name="experience"
                       value={user.experience}
@@ -139,7 +139,7 @@ const EditProfile = ({ user, setUser, handleClick }) => {
                     />
                     <input
                       type="text"
-                      className="w-full p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                      className="input-profile"
                       placeholder="Enter license number"
                       name="licenseNumber"
                       value={user.licenseNumber}
@@ -147,7 +147,7 @@ const EditProfile = ({ user, setUser, handleClick }) => {
                     />
                   </div>
                   <select
-                    className="w-full mb-3 p-2 text-lg text-gray-700 font-normal border-2 border-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                    className="form-select border--primary mb-3 p-2"
                     onChange={handleSpecialtySelect}
                   >
                     <option value="">Select Speciality</option>
@@ -191,7 +191,7 @@ const EditProfile = ({ user, setUser, handleClick }) => {
                 {role === "doctor" && (
                   <input
                     type="number"
-                    className="w-full p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                    className="input-profile"
                     placeholder="Enter fees"
                     name="fees"
                     value={user.fees}
@@ -200,7 +200,7 @@ const EditProfile = ({ user, setUser, handleClick }) => {
                 )}
                 <input
                   type="text"
-                  className="w-full p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                  className="input-profile"
                   placeholder="Enter phone"
                   name="phone"
                   value={user.phone}
@@ -209,7 +209,7 @@ const EditProfile = ({ user, setUser, handleClick }) => {
               </div>
               <input
                 type="text"
-                className="w-full mb-3 p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                className="input-profile mb-3"
                 placeholder="Enter address"
                 name="addressLine"
                 value={user.fullAddress.addressLine}
@@ -218,7 +218,7 @@ const EditProfile = ({ user, setUser, handleClick }) => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                 <input
                   type="text"
-                  className="w-full p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                  className="input-profile"
                   placeholder="Enter city"
                   name="city"
                   value={user.fullAddress.city}
@@ -226,7 +226,7 @@ const EditProfile = ({ user, setUser, handleClick }) => {
                 />
                 <input
                   type="text"
-                  className="w-full p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                  className="input-profile"
                   placeholder="Enter state"
                   name="state"
                   value={user.fullAddress.state}
@@ -234,7 +234,7 @@ const EditProfile = ({ user, setUser, handleClick }) => {
                 />
                 <input
                   type="text"
-                  className="w-full p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                  className="input-profile"
                   placeholder="Enter country"
                   name="country"
                   value={user.fullAddress.country}
@@ -242,18 +242,14 @@ const EditProfile = ({ user, setUser, handleClick }) => {
                 />
                 <input
                   type="text"
-                  className="w-full p-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                  className="input-profile"
                   placeholder="Enter pincode"
                   name="pincode"
                   value={user.fullAddress.pincode}
                   onChange={handleAddressChange}
                 />
               </div>
-              <button
-                className="w-full py-3 cursor-pointer font-medium text-white bg-sky-600 shadow-lg shadow-sky-500/50 hover:bg-sky-500 rounded-xl inline-flex space-x-2 items-center justify-center"
-                type="submit"
-                disabled={loader}
-              >
+              <button className="button w-full" type="submit" disabled={loader}>
                 {loader ? (
                   <Loader />
                 ) : (

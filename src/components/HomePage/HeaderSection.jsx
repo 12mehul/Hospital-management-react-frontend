@@ -12,21 +12,21 @@ const HeaderSection = () => {
           <img src={logo} alt="logo" className="w-18 h-18 rounded-lg" />
         </div>
         <div className="flex items-center space-x-6">
-          <a href="#home" className="common-anchor group">
+          <a href="#home" className="anchor-btn group">
             Home
-            <span className="common-span"></span>
+            <span className="anchor-btn__underline"></span>
           </a>
-          <a href="#appointment" className="common-anchor group">
+          <a href="#appointment" className="anchor-btn group">
             Appointment
-            <span className="common-span"></span>
+            <span className="anchor-btn__underline"></span>
           </a>
-          <a href="#about" className="common-anchor group">
+          <a href="#about" className="anchor-btn group">
             About
-            <span className="common-span"></span>
+            <span className="anchor-btn__underline"></span>
           </a>
-          <a href="#contact" className="common-anchor group">
+          <a href="#contact" className="anchor-btn group">
             Contact
-            <span className="common-span"></span>
+            <span className="anchor-btn__underline"></span>
           </a>
         </div>
         <div className="flex flex-col md:flex-row gap-2">

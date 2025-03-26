@@ -149,8 +149,8 @@ const PatientRegister = () => {
                         type="text"
                         className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
                           formErrors.lastName
-                            ? "border border-red-500"
-                            : "border-2 border-cyan-300"
+                            ? "border--danger"
+                            : "border--primary"
                         }`}
                         placeholder="Enter your last name"
                         name="lastName"
@@ -413,7 +413,7 @@ const PatientRegister = () => {
               >
                 {step > 1 && (
                   <button
-                    className="w-40 cursor-pointer py-3 font-medium text-white bg-sky-600 shadow-lg shadow-sky-500/50 hover:bg-sky-500 rounded-xl inline-flex space-x-2 items-center justify-center"
+                    className="button w-40"
                     type="button"
                     onClick={prevStep}
                   >
@@ -422,7 +422,7 @@ const PatientRegister = () => {
                 )}
                 {step < 3 && (
                   <button
-                    className="w-40 cursor-pointer py-3 font-medium text-white bg-sky-600 shadow-lg shadow-sky-500/50 hover:bg-sky-500 rounded-xl inline-flex space-x-2 items-center justify-center"
+                    className="button w-40"
                     type="button"
                     onClick={nextStep}
                   >
@@ -431,7 +431,7 @@ const PatientRegister = () => {
                 )}
                 {step === 3 && (
                   <button
-                    className="w-40 cursor-pointer py-3 font-medium text-white bg-sky-600 shadow-lg shadow-sky-500/50 hover:bg-sky-500 rounded-xl inline-flex space-x-2 items-center justify-center"
+                    className="button w-40"
                     type="submit"
                     disabled={loader}
                   >

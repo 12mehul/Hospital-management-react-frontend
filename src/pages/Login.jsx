@@ -128,7 +128,7 @@ const Login = () => {
                   </span>
                 </div>
                 <button
-                  className="w-full cursor-pointer py-3 font-medium text-white bg-sky-600 shadow-lg shadow-sky-500/50 hover:bg-sky-500 rounded-xl inline-flex space-x-2 items-center justify-center"
+                  className="button w-full"
                   type="submit"
                   disabled={loader}
                 >
