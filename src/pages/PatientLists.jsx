@@ -13,9 +13,7 @@ const PatientLists = () => {
   return (
     <>
       <div className="p-2 bg-white rounded-lg shadow-md mb-5">
-        <h2 className="flex items-center justify-center text-2xl font-bold text-gray-700 uppercase">
-          Patient Lists
-        </h2>
+        <h2 className="title">Patient Lists</h2>
       </div>
       <div className="relative flex-grow mb-5">
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">

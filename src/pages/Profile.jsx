@@ -11,9 +11,7 @@ const Profile = () => {
   return (
     <>
       <div className="p-2 bg-white rounded-lg shadow-md">
-        <h2 className="flex items-center justify-center text-2xl font-bold text-gray-700 uppercase">
-          Profile
-        </h2>
+        <h2 className="title">Profile</h2>
       </div>
       <div className="w-full mx-auto flex flex-col items-center justify-center my-6">
         {showType === "details" && (

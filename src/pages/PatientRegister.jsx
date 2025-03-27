@@ -129,10 +129,10 @@ const PatientRegister = () => {
                     <div className="w-full">
                       <input
                         type="text"
-                        className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
+                        className={`form-input ${
                           formErrors.firstName
-                            ? "border border-red-500"
-                            : "border-2 border-cyan-300"
+                            ? "border--danger"
+                            : "border--primary"
                         }`}
                         placeholder="Enter your first name"
                         name="firstName"
@@ -140,14 +140,14 @@ const PatientRegister = () => {
                         onChange={handleInputChange}
                         onBlur={handleInputChange}
                       />
-                      <span className="pl-2 text-red-500">
+                      <span className="text--danger">
                         {formErrors.firstName}
                       </span>
                     </div>
                     <div className="w-full">
                       <input
                         type="text"
-                        className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
+                        className={`form-input ${
                           formErrors.lastName
                             ? "border--danger"
                             : "border--primary"
@@ -158,7 +158,7 @@ const PatientRegister = () => {
                         onChange={handleInputChange}
                         onBlur={handleInputChange}
                       />
-                      <span className="pl-2 text-red-500">
+                      <span className="text--danger">
                         {formErrors.lastName}
                       </span>
                     </div>
@@ -166,10 +166,8 @@ const PatientRegister = () => {
                   <div>
                     <input
                       type="email"
-                      className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
-                        formErrors.email
-                          ? "border border-red-500"
-                          : "border-2 border-cyan-300"
+                      className={`form-input ${
+                        formErrors.email ? "border--danger" : "border--primary"
                       }`}
                       placeholder="Enter your email"
                       name="email"
@@ -177,18 +175,16 @@ const PatientRegister = () => {
                       onChange={handleInputChange}
                       onBlur={handleInputChange}
                     />
-                    <span className="pl-2 text-red-500">
-                      {formErrors.email}
-                    </span>
+                    <span className="text--danger">{formErrors.email}</span>
                   </div>
                   <div className="flex flex-col md:flex-row gap-3">
                     <div className="w-full">
                       <input
                         type="password"
-                        className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
+                        className={`form-input ${
                           formErrors.password
-                            ? "border border-red-500"
-                            : "border-2 border-cyan-300"
+                            ? "border--danger"
+                            : "border--primary"
                         }`}
                         placeholder="Enter your password"
                         name="password"
@@ -196,17 +192,17 @@ const PatientRegister = () => {
                         onChange={handleInputChange}
                         onBlur={handleInputChange}
                       />
-                      <span className="pl-2 text-red-500">
+                      <span className="text--danger">
                         {formErrors.password}
                       </span>
                     </div>
                     <div className="w-full">
                       <input
                         type="password"
-                        className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
+                        className={`form-input ${
                           formErrors.confirmPassword
-                            ? "border border-red-500"
-                            : "border-2 border-cyan-300"
+                            ? "border--danger"
+                            : "border--primary"
                         }`}
                         placeholder="Enter your confirm password"
                         name="confirmPassword"
@@ -214,7 +210,7 @@ const PatientRegister = () => {
                         onChange={handleInputChange}
                         onBlur={handleInputChange}
                       />
-                      <span className="pl-2 text-red-500">
+                      <span className="text--danger">
                         {formErrors.confirmPassword}
                       </span>
                     </div>
@@ -227,10 +223,8 @@ const PatientRegister = () => {
                   <div>
                     <input
                       type="date"
-                      className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
-                        formErrors.dob
-                          ? "border border-red-500"
-                          : "border-2 border-cyan-300"
+                      className={`form-input ${
+                        formErrors.dob ? "border--danger" : "border--primary"
                       }`}
                       placeholder="Enter your dob"
                       name="dob"
@@ -238,14 +232,12 @@ const PatientRegister = () => {
                       onChange={handleInputChange}
                       onBlur={handleInputChange}
                     />
-                    <span className="pl-2 text-red-500">{formErrors.dob}</span>
+                    <span className="text--danger">{formErrors.dob}</span>
                   </div>
                   <div>
                     <div
-                      className={`w-full flex gap-3 p-3 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
-                        formErrors.gender
-                          ? "border border-red-500"
-                          : "border-2 border-cyan-300"
+                      className={`form-input flex gap-3 ${
+                        formErrors.gender ? "border--danger" : "border--primary"
                       }`}
                     >
                       <div className="flex items-center justify-center gap-3">
@@ -258,12 +250,7 @@ const PatientRegister = () => {
                           onChange={handleInputChange}
                           onBlur={handleInputChange}
                         />
-                        <label
-                          htmlFor="male"
-                          className="text-lg text-gray-700 font-normal"
-                        >
-                          Male
-                        </label>
+                        <label htmlFor="male">Male</label>
                       </div>
                       <div className="flex items-center justify-center gap-3">
                         <input
@@ -275,25 +262,18 @@ const PatientRegister = () => {
                           onChange={handleInputChange}
                           onBlur={handleInputChange}
                         />
-                        <label
-                          htmlFor="female"
-                          className="text-lg text-gray-700 font-normal"
-                        >
-                          Female
-                        </label>
+                        <label htmlFor="female">Female</label>
                       </div>
                     </div>
-                    <span className="pl-2 text-red-500 empty:hidden">
+                    <span className="text--danger empty:hidden">
                       {formErrors.gender}
                     </span>
                   </div>
                   <div>
                     <input
                       type="text"
-                      className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
-                        formErrors.phone
-                          ? "border border-red-500"
-                          : "border-2 border-cyan-300"
+                      className={`form-input ${
+                        formErrors.phone ? "border--danger" : "border--primary"
                       }`}
                       placeholder="Enter your phone"
                       name="phone"
@@ -301,9 +281,7 @@ const PatientRegister = () => {
                       onChange={handleInputChange}
                       onBlur={handleInputChange}
                     />
-                    <span className="pl-2 text-red-500">
-                      {formErrors.phone}
-                    </span>
+                    <span className="text--danger">{formErrors.phone}</span>
                   </div>
                 </div>
               )}
@@ -313,10 +291,10 @@ const PatientRegister = () => {
                   <div>
                     <input
                       type="text"
-                      className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
+                      className={`form-input ${
                         formErrors.addressLine
-                          ? "border border-red-500"
-                          : "border-2 border-cyan-300"
+                          ? "border--danger"
+                          : "border--primary"
                       }`}
                       placeholder="Enter your address"
                       name="addressLine"
@@ -324,7 +302,7 @@ const PatientRegister = () => {
                       onChange={handleInputChange}
                       onBlur={handleInputChange}
                     />
-                    <span className="pl-2 text-red-500">
+                    <span className="text--danger">
                       {formErrors.addressLine}
                     </span>
                   </div>
@@ -332,10 +310,8 @@ const PatientRegister = () => {
                     <div className="w-full">
                       <input
                         type="text"
-                        className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
-                          formErrors.city
-                            ? "border border-red-500"
-                            : "border-2 border-cyan-300"
+                        className={`form-input ${
+                          formErrors.city ? "border--danger" : "border--primary"
                         }`}
                         placeholder="Enter your city"
                         name="city"
@@ -343,17 +319,15 @@ const PatientRegister = () => {
                         onChange={handleInputChange}
                         onBlur={handleInputChange}
                       />
-                      <span className="pl-2 text-red-500">
-                        {formErrors.city}
-                      </span>
+                      <span className="text--danger">{formErrors.city}</span>
                     </div>
                     <div className="w-full">
                       <input
                         type="text"
-                        className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
+                        className={`form-input ${
                           formErrors.state
-                            ? "border border-red-500"
-                            : "border-2 border-cyan-300"
+                            ? "border--danger"
+                            : "border--primary"
                         }`}
                         placeholder="Enter your state"
                         name="state"
@@ -361,19 +335,17 @@ const PatientRegister = () => {
                         onChange={handleInputChange}
                         onBlur={handleInputChange}
                       />
-                      <span className="pl-2 text-red-500">
-                        {formErrors.state}
-                      </span>
+                      <span className="text--danger">{formErrors.state}</span>
                     </div>
                   </div>
                   <div className="flex flex-col md:flex-row gap-3">
                     <div className="w-full">
                       <input
                         type="text"
-                        className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
+                        className={`form-input ${
                           formErrors.country
-                            ? "border border-red-500"
-                            : "border-2 border-cyan-300"
+                            ? "border--danger"
+                            : "border--primary"
                         }`}
                         placeholder="Enter your country"
                         name="country"
@@ -381,17 +353,15 @@ const PatientRegister = () => {
                         onChange={handleInputChange}
                         onBlur={handleInputChange}
                       />
-                      <span className="pl-2 text-red-500">
-                        {formErrors.country}
-                      </span>
+                      <span className="text--danger">{formErrors.country}</span>
                     </div>
                     <div className="w-full">
                       <input
                         type="text"
-                        className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
+                        className={`form-input ${
                           formErrors.pincode
-                            ? "border border-red-500"
-                            : "border-2 border-cyan-300"
+                            ? "border--danger"
+                            : "border--primary"
                         }`}
                         placeholder="Enter your pincode"
                         name="pincode"
@@ -399,9 +369,7 @@ const PatientRegister = () => {
                         onChange={handleInputChange}
                         onBlur={handleInputChange}
                       />
-                      <span className="pl-2 text-red-500">
-                        {formErrors.pincode}
-                      </span>
+                      <span className="text--danger">{formErrors.pincode}</span>
                     </div>
                   </div>
                 </div>

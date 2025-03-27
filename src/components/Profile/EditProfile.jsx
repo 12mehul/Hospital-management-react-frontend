@@ -130,7 +130,7 @@ const EditProfile = ({ user, setUser, handleClick }) => {
                 <>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                     <input
-                      type="text"
+                      type="number"
                       className="input-profile"
                       placeholder="Enter experience"
                       name="experience"

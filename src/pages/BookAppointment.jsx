@@ -26,9 +26,7 @@ const BookAppointment = () => {
   return (
     <>
       <div className="p-2 bg-white rounded-lg shadow-md">
-        <h2 className="flex items-center justify-center text-2xl font-bold text-gray-700 uppercase">
-          Find Doctor & Book An Appointment
-        </h2>
+        <h2 className="title">Find Doctor & Book An Appointment</h2>
       </div>
       <div className="p-1">
         <div className="mt-2 mb-2 flex justify-end">
@@ -135,12 +133,12 @@ const BookAppointment = () => {
               <div className="py-4">
                 <input
                   type="text"
-                  className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+                  className="input-profile"
                   placeholder="Enter Patient Name and ID"
                 />
               </div>
               <div className="w-full flex flex-col gap-1 bg-white rounded-lg shadow-md overflow-y-auto">
-                <div className="flex justify-between p-3 hover:shadow-md hover:shadow-sky-400 cursor-pointer">
+                <div className="flex justify-between p-2 hover:shadow-md hover:shadow-sky-400 cursor-pointer">
                   <h5 className="text-xl font-semibold tracking-tight text-gray-800 capitalize">
                     {/* ${patient.firstName + " " + patient.lastName} */}
                     lastName

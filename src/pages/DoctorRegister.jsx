@@ -114,7 +114,7 @@ const DoctorRegister = () => {
                   <div className="flex flex-col md:flex-row gap-3">
                     <div className="w-full">
                       <input
-                        type="text"
+                        type="number"
                         className="w-full p-3 text-lg text-gray-700 font-normal border-2 border-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
                         placeholder="Enter your experience"
                         name="experience"
