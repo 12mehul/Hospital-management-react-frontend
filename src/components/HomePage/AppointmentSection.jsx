@@ -4,37 +4,35 @@ import appointmentImg from "../../assets/img/appointment_booking_home.jpg";
 
 const AppointmentSection = () => {
   return (
-    <>
-      <h2 className="text-2xl text-center font-semibold text-blue-800">
-        Book Your Appointment with Ease
-      </h2>
-      <div className="container mx-auto px-16 py-4 items-center flex flex-col lg:flex-row">
-        <div className="lg:w-1/2">
-          <div className="lg:pl-32 xl:pl-48">
-            <h3 className="text-3xl font-semibold leading-tight">
-              Take control of your healthcare by booking appointments that fit
-              your schedule:
-            </h3>
-            <p className="mt-8 text-xl font-light leading-relaxed">
-              Once the market analysis process is completed our staff will
-              search for opportunities that are in reach
-            </p>
-            <Link to="/appointment" className="flex items-start my-5">
-              <button className="button w-40" type="button">
-                Book Appointment
-              </button>
-            </Link>
-          </div>
-        </div>
-        <div className="mt-10 lg:mt-0 w-full lg:w-1/2 flex items-center justify-start order-last lg:order-first">
-          <img
-            src={appointmentImg}
-            alt="logo"
-            className="rounded-lg shadow-lg shadow-gray-300 w-lg"
-          />
+    <div className="container mx-auto px-6 md:px-12 lg:px-16 py-8 flex flex-col-reverse lg:flex-row items-center justify-between">
+      <div className="mt-10 lg:mt-0 w-full lg:w-1/2 px-6 md:px-10 lg:px-14 flex items-center justify-center lg:justify-start">
+        <img
+          src={appointmentImg}
+          alt="Appointment illustration"
+          className="rounded-lg shadow-lg shadow-gray-300 w-64 md:w-80 lg:w-96"
+        />
+      </div>
+      <div className="lg:w-1/2 w-full px-6 md:px-10 lg:px-14">
+        <h2 className="mb-6 text-4xl md:text-5xl font-semibold text-blue-800 text-left">
+          Book Appointment
+        </h2>
+        <div className="lg:pr-16 xl:pr-24">
+          <h3 className="text-2xl md:text-3xl font-semibold leading-tight mb-4">
+            Take control of your healthcare by booking appointments that fit
+            your schedule:
+          </h3>
+          <p className="mt-4 text-lg md:text-xl font-light leading-relaxed">
+            Once the market analysis process is completed our staff will search
+            for opportunities that are in reach
+          </p>
+          <Link to="/appointment" className="flex items-start my-5">
+            <button className="button w-40" type="button">
+              Book Appointment
+            </button>
+          </Link>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

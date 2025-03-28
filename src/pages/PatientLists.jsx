@@ -21,7 +21,8 @@ const PatientLists = () => {
         </div>
         <input
           type="text"
-          className="w-full px-10 py-2 text-lg text-gray-700 font-normal border-2 border-cyan-100 border-b-cyan-300 focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md"
+          className="input-profile"
+          style={{ paddingLeft: "40px" }}
           placeholder="Search Patients..."
         />
         <button
