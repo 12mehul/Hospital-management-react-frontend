@@ -10,12 +10,18 @@ const HomeSection = () => {
         </h2>
         <div className="lg:pr-16 xl:pr-24">
           <h3 className="text-2xl md:text-3xl font-semibold leading-tight mb-4">
-            Your health and convenience are our top priorities. Our
-            user-friendly platform allows you to:
+            Quick, Easy, Reliable
           </h3>
           <p className="mt-4 text-lg md:text-xl font-light leading-relaxed">
-            Our team of enthusiastic marketers will analyze and evaluate how
-            your company stacks against the closest competitors.
+            - Book appointments with a few clicks.
+            <br />
+            - Find top doctors by availability.
+            <br />
+            - Manage appointments & history in one place.
+            <br />
+            <b>Get Started Now!</b>
+            <br />
+            Take charge of your health today.
           </p>
         </div>
       </div>

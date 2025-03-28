@@ -18,12 +18,18 @@ const AppointmentSection = () => {
         </h2>
         <div className="lg:pr-16 xl:pr-24">
           <h3 className="text-2xl md:text-3xl font-semibold leading-tight mb-4">
-            Take control of your healthcare by booking appointments that fit
-            your schedule:
+            Quick & Easy Appointments
           </h3>
           <p className="mt-4 text-lg md:text-xl font-light leading-relaxed">
-            Once the market analysis process is completed our staff will search
-            for opportunities that are in reach
+            - Choose your doctor & time slot.
+            <br />
+            - Find top specialists with ease.
+            <br />
+            - Get instant confirmations & reminders.
+            <br />
+            <b>Start Booking Now!</b>
+            <br />
+            Your next appointment is a click away.
           </p>
           <Link to="/appointment" className="flex items-start my-5">
             <button className="button w-40" type="button">

@@ -10,14 +10,24 @@ const AboutSection = () => {
         </h2>
         <div className="lg:pr-16 xl:pr-24">
           <h3 className="text-2xl md:text-3xl font-semibold leading-tight mb-4">
-            At HealthCare Wellness Center, we believe in making healthcare
-            accessible and convenient for everyone. Our mission is to connect
-            patients with the right healthcare providers, ensuring that you
-            receive the best care when you need it most.
+            Simple, Accessible Healthcare
           </h3>
           <p className="mt-4 text-lg md:text-xl font-light leading-relaxed">
-            Our team of enthusiastic marketers will analyse and evaluate how
-            your company stacks against the closest competitors
+            - Connecting patients with top healthcare providers.
+            <br />
+            - User-friendly platform for easy booking.
+            <br />
+            - Personalized care for your unique needs.
+            <br />
+            <b>Why Choose Us?</b>
+            <br />
+            - Highly qualified doctors & specialists.
+            <br />
+            - Intuitive, easy-to-use platform.
+            <br />
+            <b>Join Our Journey</b>
+            <br />
+            Let's make healthcare simple and personalized.
           </p>
         </div>
       </div>
