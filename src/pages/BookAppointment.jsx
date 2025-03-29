@@ -3,6 +3,8 @@ import backIcon from "../assets/icon/back-icon.jpg";
 import { useAdminFetch } from "../customHooks/useAdminFetch";
 import SpecialityLists from "../components/BookAppointment/SpecialityLists";
 import DoctorLists from "../components/BookAppointment/DoctorLists";
+import SlotLists from "../components/BookAppointment/SlotLists";
+import FindPatients from "../components/BookAppointment/FindPatients";
 
 const BookAppointment = () => {
   const [step, setStep] = useState(1);
@@ -99,65 +101,9 @@ const BookAppointment = () => {
             />
           )}
           {/* <!-- Step 3: Slots --> */}
-          {step === 3 && (
-            <div className="mt-2 grid gap-6 px-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:p-2 xl:p-4">
-              <div
-                className="p-4 flex items-center bg-white rounded-xl shadow-md shadow-gray-300 cursor-pointer transition transform duration-500 hover:scale-105 hover:shadow-blue-500 hover:transition"
-                onClick={nextStep}
-              >
-                <div className="bg-blue-600 p-3 rounded-full text-center">
-                  <p className="text-xl font-semibold text-white">05</p>
-                </div>
-                <div className="ml-4">
-                  <div className="uppercase px-2 rounded-md text-white bg-green-400 font-semibold">
-                    Paid
-                  </div>
-                  <p className="mt-2 text-gray-800">
-                    DATE:
-                    {/* ${new Date(val.date).toLocaleDateString()} */}2024-07-25
-                  </p>
-                  <p className="mt-2 text-gray-700">
-                    TIME:
-                    {/* ${val.time} */}07:45 AM
-                  </p>
-                  <p className="mt-2 font-semibold text-gray-600">
-                    AMOUNT: Rs. 500/-
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
+          {step === 3 && <SlotLists nextStep={nextStep} />}
           {/* <!-- Step 4: Patients --> */}
-          {step === 4 && (
-            <>
-              <div className="py-4">
-                <input
-                  type="text"
-                  className="input-profile"
-                  placeholder="Enter Patient Name and ID"
-                />
-              </div>
-              <div className="w-full flex flex-col gap-1 bg-white rounded-lg shadow-md overflow-y-auto">
-                <div className="flex justify-between p-2 hover:shadow-md hover:shadow-sky-400 cursor-pointer">
-                  <h5 className="text-xl font-semibold tracking-tight text-gray-800 capitalize">
-                    {/* ${patient.firstName + " " + patient.lastName} */}
-                    lastName
-                  </h5>
-                  <p className="font-semibold text-gray-600">
-                    {/* ${patient.patientID} */}12345
-                  </p>
-                </div>
-              </div>
-            </>
-          )}
-          {/* <!-- Submit Buttons --> */}
-          {step === 4 && (
-            <div className="flex justify-end mt-4">
-              <button type="submit" className="button w-40">
-                Submit
-              </button>
-            </div>
-          )}
+          {step === 4 && <FindPatients />}
         </form>
       </div>
     </>

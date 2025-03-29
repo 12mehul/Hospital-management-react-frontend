@@ -96,10 +96,8 @@ const Login = () => {
                 <div>
                   <input
                     type="email"
-                    className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
-                      formErrors.email
-                        ? "border border-red-500"
-                        : "border-2 border-cyan-300"
+                    className={`form-input ${
+                      formErrors.email ? "border--danger" : "border--primary"
                     }`}
                     placeholder="Enter your email"
                     name="email"
@@ -107,15 +105,13 @@ const Login = () => {
                     onChange={handleInputChange}
                     onBlur={handleInputChange}
                   />
-                  <span className="pl-2 text-red-500">{formErrors.email}</span>
+                  <span className="text--danger">{formErrors.email}</span>
                 </div>
                 <div className="w-full">
                   <input
                     type="password"
-                    className={`w-full p-3 text-lg text-gray-700 font-normal focus:border-cyan-500 focus:outline-none hover:shadow-md bg-transparent rounded-md ${
-                      formErrors.password
-                        ? "border border-red-500"
-                        : "border-2 border-cyan-300"
+                    className={`form-input ${
+                      formErrors.password ? "border--danger" : "border--primary"
                     }`}
                     placeholder="Enter your password"
                     name="password"
@@ -123,9 +119,7 @@ const Login = () => {
                     onChange={handleInputChange}
                     onBlur={handleInputChange}
                   />
-                  <span className="pl-2 text-red-500">
-                    {formErrors.password}
-                  </span>
+                  <span className="text--danger">{formErrors.password}</span>
                 </div>
                 <button
                   className="button w-full"
