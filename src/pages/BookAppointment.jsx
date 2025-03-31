@@ -12,6 +12,7 @@ const BookAppointment = () => {
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [selectedPatient, setSelectedPatient] = useState(null);
+  const [searchInput, setSearchInput] = useState("");
   const [specializationId, setSpecializationId] = useState(null);
 
   const { data: specialities, loading: loadingSpeciality } =
@@ -20,6 +21,12 @@ const BookAppointment = () => {
     selectedSpeciality
       ? `/doctors?specializationId=${selectedSpeciality}`
       : "/doctors"
+  );
+  const { data: slots, loading: loadingSlot } = useAdminFetch(
+    selectedDoctor ? `/slots?doctorId=${selectedDoctor}` : null
+  );
+  const { data: patients, loading: loadingPatient } = useAdminFetch(
+    searchInput ? `/patients/search?name=${searchInput}` : null
   );
 
   const prevStep = () => setStep(step - 1);
@@ -68,6 +75,7 @@ const BookAppointment = () => {
                 setStep(2);
                 setSelectedSpeciality(null);
                 setSpecializationId(null);
+                setSelectedDoctor(null);
               }}
             >
               Doctors
@@ -101,7 +109,16 @@ const BookAppointment = () => {
             />
           )}
           {/* <!-- Step 3: Slots --> */}
-          {step === 3 && <SlotLists nextStep={nextStep} />}
+          {step === 3 && (
+            <SlotLists
+              doctors={doctors}
+              selectedDoctor={selectedDoctor}
+              setSelectedSlot={(id) => {
+                setSelectedSlot(id);
+                nextStep();
+              }}
+            />
+          )}
           {/* <!-- Step 4: Patients --> */}
           {step === 4 && <FindPatients />}
         </form>

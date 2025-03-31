@@ -22,6 +22,7 @@ export const useAdminFetch = (url) => {
   };
 
   useEffect(() => {
+    if (!url) return; // 🚀 Stop execution if URL is null or empty
     getData();
   }, [url]);
   return { data, loading };

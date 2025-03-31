@@ -8,6 +8,8 @@ const FindPatients = () => {
           type="text"
           className="input-profile"
           placeholder="Enter Patient Name and ID"
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
         />
       </div>
       <div className="w-full flex flex-col gap-1 bg-white rounded-lg shadow-md overflow-y-auto">
