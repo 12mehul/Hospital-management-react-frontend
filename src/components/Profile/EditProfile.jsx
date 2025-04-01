@@ -134,7 +134,7 @@ const EditProfile = ({ user, setUser, handleClick }) => {
                       className="input-profile"
                       placeholder="Enter experience"
                       name="experience"
-                      value={user.experience}
+                      value={user.experience || 0}
                       onChange={handleChange}
                     />
                     <input
@@ -194,7 +194,7 @@ const EditProfile = ({ user, setUser, handleClick }) => {
                     className="input-profile"
                     placeholder="Enter fees"
                     name="fees"
-                    value={user.fees}
+                    value={user.fees || 0}
                     onChange={handleChange}
                   />
                 )}
