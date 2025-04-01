@@ -1,7 +1,13 @@
 import React from "react";
 import Skelton from "../../common/Skelton";
 
-const SlotLists = ({ doctors, selectedDoctor, setSelectedSlot }) => {
+const SlotLists = ({
+  loading,
+  data,
+  doctors,
+  selectedDoctor,
+  setSelectedSlot,
+}) => {
   const singleDoctor = doctors?.doctors.find(
     (doc) => doc._id === selectedDoctor
   );

@@ -111,6 +111,8 @@ const BookAppointment = () => {
           {/* <!-- Step 3: Slots --> */}
           {step === 3 && (
             <SlotLists
+              loading={loadingSlot}
+              data={slots}
               doctors={doctors}
               selectedDoctor={selectedDoctor}
               setSelectedSlot={(id) => {
@@ -120,7 +122,15 @@ const BookAppointment = () => {
             />
           )}
           {/* <!-- Step 4: Patients --> */}
-          {step === 4 && <FindPatients />}
+          {step === 4 && (
+            <FindPatients
+              loading={loadingPatient}
+              data={patients}
+              searchInput={searchInput}
+              setSearchInput={setSearchInput}
+              setSelectedPatient={setSelectedPatient}
+            />
+          )}
         </form>
       </div>
     </>
