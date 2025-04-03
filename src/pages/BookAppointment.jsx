@@ -14,7 +14,12 @@ const BookAppointment = () => {
   const [selectedPatient, setSelectedPatient] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [specializationId, setSpecializationId] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const role = localStorage.getItem("role");
+  const userId = localStorage.getItem("id");
+  const loggedInPatientId = role === "patient" ? userId : null;
+  
   const { data: specialities, loading: loadingSpeciality } =
     useAdminFetch("/speciality/count");
   const { data: doctors, loading: loadingDoctor } = useAdminFetch(
@@ -38,9 +43,9 @@ const BookAppointment = () => {
         <h2 className="title">Find Doctor & Book An Appointment</h2>
       </div>
       <div className="p-1">
-        <div className="mt-2 mb-2 flex justify-end">
+        <div className="my-2 flex justify-center">
           {step > 1 && (
-            <div className="w-full flex items-center justify-start gap-1">
+            <div className="flex items-center justify-start gap-1">
               <img
                 src={backIcon}
                 alt="Back"
@@ -54,22 +59,22 @@ const BookAppointment = () => {
               </span>
             </div>
           )}
-          <div className="flex gap-3 justify-end">
-            <span
-              className={`w-24 py-3 hover:text-blue-700 bg-white shadow-md shadow-blue-500/50 rounded-2xl inline-flex space-x-2 items-center justify-center text-base font-medium cursor-pointer ${
+          <div className="flex border-b border-gray-300 w-fit mx-auto">
+            <button
+              className={`px-6 py-3 text-gray-600 font-medium transition-colors cursor-pointer ${
                 step === 1
-                  ? "text-blue-800 underline"
-                  : "text-black no-underline"
+                  ? "text-blue-800 border-b-2 border-blue-600"
+                  : "hover:text-blue-700"
               }`}
               onClick={() => setStep(1)}
             >
               Speciality
-            </span>
-            <span
-              className={`w-24 py-3 hover:text-blue-700 bg-white shadow-md shadow-blue-500/50 rounded-2xl inline-flex space-x-2 items-center justify-center text-base font-medium cursor-pointer ${
+            </button>
+            <button
+              className={`px-6 py-3 text-gray-600 font-medium transition-colors cursor-pointer ${
                 step === 2
-                  ? "text-blue-800 underline"
-                  : "text-black no-underline"
+                  ? "text-blue-800 border-b-2 border-blue-600"
+                  : "hover:text-blue-700"
               }`}
               onClick={() => {
                 setStep(2);
@@ -79,7 +84,18 @@ const BookAppointment = () => {
               }}
             >
               Doctors
-            </span>
+            </button>
+            <button
+              className={`px-6 py-3 font-medium transition-colors ${
+                step === 1
+                  ? "text-gray-600 hover:text-blue-700 cursor-pointer"
+                  : "text-gray-400 cursor-not-allowed"
+              }`}
+              disabled={step > 1}
+              onClick={() => setIsModalOpen(true)}
+            >
+              Other Patients
+            </button>
           </div>
         </div>
         <form>
@@ -121,14 +137,16 @@ const BookAppointment = () => {
               }}
             />
           )}
-          {/* <!-- Step 4: Patients --> */}
-          {step === 4 && (
+          {/* <!-- Step 4: Final Book Appointment --> */}
+          {/* <!-- Find Other Patients --> */}
+          {isModalOpen && (
             <FindPatients
               loading={loadingPatient}
               data={patients}
               searchInput={searchInput}
               setSearchInput={setSearchInput}
               setSelectedPatient={setSelectedPatient}
+              onClose={() => setIsModalOpen(false)}
             />
           )}
         </form>
