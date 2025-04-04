@@ -8,24 +8,29 @@ import FindPatients from "../components/BookAppointment/FindPatients";
 
 const BookAppointment = () => {
   const [step, setStep] = useState(1);
-  const [selectedSpeciality, setSelectedSpeciality] = useState(null);
+  const [searchInput, setSearchInput] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [selectedSpeciality, setSelectedSpeciality] = useState({
+    id: null,
+    isFilter: "filterDoctors",
+  });
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [selectedPatient, setSelectedPatient] = useState(null);
-  const [searchInput, setSearchInput] = useState("");
-  const [specializationId, setSpecializationId] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const role = localStorage.getItem("role");
   const userId = localStorage.getItem("id");
   const loggedInPatientId = role === "patient" ? userId : null;
-  
+
   const { data: specialities, loading: loadingSpeciality } =
     useAdminFetch("/speciality/count");
   const { data: doctors, loading: loadingDoctor } = useAdminFetch(
-    selectedSpeciality
-      ? `/doctors?specializationId=${selectedSpeciality}`
-      : "/doctors"
+    selectedSpeciality.id && selectedSpeciality.isFilter === "filterDoctors"
+      ? `/doctors?specializationId=${selectedSpeciality.id}`
+      : selectedSpeciality.isFilter === "allDoctors"
+      ? `/doctors`
+      : null
   );
   const { data: slots, loading: loadingSlot } = useAdminFetch(
     selectedDoctor ? `/slots?doctorId=${selectedDoctor}` : null
@@ -78,8 +83,7 @@ const BookAppointment = () => {
               }`}
               onClick={() => {
                 setStep(2);
-                setSelectedSpeciality(null);
-                setSpecializationId(null);
+                setSelectedSpeciality({ id: null, isFilter: "allDoctors" });
                 setSelectedDoctor(null);
               }}
             >
@@ -105,8 +109,7 @@ const BookAppointment = () => {
               loading={loadingSpeciality}
               data={specialities}
               setSelectedSpeciality={(id) => {
-                setSelectedSpeciality(id);
-                setSpecializationId(id);
+                setSelectedSpeciality({ id, isFilter: "filterDoctors" });
                 nextStep();
               }}
             />
@@ -117,8 +120,8 @@ const BookAppointment = () => {
               loading={loadingDoctor}
               data={doctors}
               selectedSpeciality={selectedSpeciality}
-              setSpecializationId={(id) => {
-                setSpecializationId(id);
+              setSelectedSpeciality={(id) => {
+                setSelectedSpeciality({ id, isFilter: "selectedDoctor" });
                 nextStep();
               }}
               setSelectedDoctor={setSelectedDoctor}

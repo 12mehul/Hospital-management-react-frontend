@@ -6,7 +6,7 @@ const DoctorLists = ({
   loading,
   data,
   selectedSpeciality,
-  setSpecializationId,
+  setSelectedSpeciality,
   setSelectedDoctor,
 }) => {
   return (
@@ -20,11 +20,12 @@ const DoctorLists = ({
       ) : data?.doctors.length > 0 ? (
         data?.doctors.map((val) => {
           // Filter chips based on selectedSpeciality
-          const filteredSpecializations = !selectedSpeciality
-            ? val.specializationId // Show all if empty
-            : val.specializationId.filter(
-                (s) => s._id === selectedSpeciality // Match only selected ID
-              );
+          const filteredSpecializations =
+            selectedSpeciality.isFilter === "filterDoctors"
+              ? val.specializationId.filter(
+                  (s) => s._id === selectedSpeciality.id
+                ) // Match only selected ID
+              : val.specializationId; // Show all if empty;
 
           return (
             <div
@@ -51,7 +52,7 @@ const DoctorLists = ({
                       type="button"
                       key={s._id}
                       onClick={() => {
-                        setSpecializationId(s._id);
+                        setSelectedSpeciality(s._id);
                         setSelectedDoctor(val._id);
                       }}
                     >
