@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import backIcon from "../assets/icon/back-icon.jpg";
 import { useAdminFetch } from "../customHooks/useAdminFetch";
+import { useToast } from "../context/ToastProvider";
+import { useAuth } from "../context/AuthContext";
 import SpecialityLists from "../components/BookAppointment/SpecialityLists";
 import DoctorLists from "../components/BookAppointment/DoctorLists";
 import SlotLists from "../components/BookAppointment/SlotLists";
 import FindPatients from "../components/BookAppointment/FindPatients";
 
 const BookAppointment = () => {
+  const { user } = useAuth();
+  const toast = useToast();
   const [step, setStep] = useState(1);
   const [searchInput, setSearchInput] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const role = localStorage.getItem("role");
 
   const [selectedSpeciality, setSelectedSpeciality] = useState({
     id: null,
@@ -19,9 +24,16 @@ const BookAppointment = () => {
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [selectedPatient, setSelectedPatient] = useState(null);
 
-  const role = localStorage.getItem("role");
-  const userId = localStorage.getItem("id");
-  const loggedInPatientId = role === "patient" ? userId : null;
+  useEffect(() => {
+    if (user && role === "patient") {
+      setSelectedPatient({
+        id: user._id,
+        name: `${user.firstName} ${user.lastName}`,
+        patientId: user.patientID,
+        type: "self",
+      });
+    }
+  }, [user, role]);
 
   const { data: specialities, loading: loadingSpeciality } =
     useAdminFetch("/speciality/count");
@@ -39,8 +51,34 @@ const BookAppointment = () => {
     searchInput ? `/patients/search?name=${searchInput}` : null
   );
 
-  const prevStep = () => setStep(step - 1);
-  const nextStep = () => setStep(step + 1);
+  const prevStep = () => setStep((prev) => prev - 1);
+  const nextStep = () => setStep((prev) => prev + 1);
+
+  const handleSpecialitySelect = (id) => {
+    setSelectedSpeciality({ id, isFilter: "filterDoctors" });
+    nextStep();
+  };
+
+  const handleDoctorSelect = (id) => {
+    setSelectedSpeciality({ id, isFilter: "selectedDoctor" });
+    nextStep();
+  };
+
+  const handleSlotSelect = (id) => {
+    setSelectedSlot(id);
+    nextStep();
+  };
+
+  const handleStepOneClick = () => {
+    setStep(1);
+    setSelectedSpeciality({ id: null, isFilter: "filterDoctors" });
+  };
+
+  const handleStepTwoClick = () => {
+    setStep(2);
+    setSelectedSpeciality({ id: null, isFilter: "allDoctors" });
+    setSelectedDoctor(null);
+  };
 
   return (
     <>
@@ -71,7 +109,7 @@ const BookAppointment = () => {
                   ? "text-blue-800 border-b-2 border-blue-600"
                   : "hover:text-blue-700"
               }`}
-              onClick={() => setStep(1)}
+              onClick={handleStepOneClick}
             >
               Speciality
             </button>
@@ -81,11 +119,7 @@ const BookAppointment = () => {
                   ? "text-blue-800 border-b-2 border-blue-600"
                   : "hover:text-blue-700"
               }`}
-              onClick={() => {
-                setStep(2);
-                setSelectedSpeciality({ id: null, isFilter: "allDoctors" });
-                setSelectedDoctor(null);
-              }}
+              onClick={handleStepTwoClick}
             >
               Doctors
             </button>
@@ -108,10 +142,7 @@ const BookAppointment = () => {
             <SpecialityLists
               loading={loadingSpeciality}
               data={specialities}
-              setSelectedSpeciality={(id) => {
-                setSelectedSpeciality({ id, isFilter: "filterDoctors" });
-                nextStep();
-              }}
+              setSelectedSpeciality={handleSpecialitySelect}
             />
           )}
           {/* <!-- Step 2: Doctors --> */}
@@ -120,10 +151,7 @@ const BookAppointment = () => {
               loading={loadingDoctor}
               data={doctors}
               selectedSpeciality={selectedSpeciality}
-              setSelectedSpeciality={(id) => {
-                setSelectedSpeciality({ id, isFilter: "selectedDoctor" });
-                nextStep();
-              }}
+              setSelectedSpeciality={handleDoctorSelect}
               setSelectedDoctor={setSelectedDoctor}
             />
           )}
@@ -134,10 +162,7 @@ const BookAppointment = () => {
               data={slots}
               doctors={doctors}
               selectedDoctor={selectedDoctor}
-              setSelectedSlot={(id) => {
-                setSelectedSlot(id);
-                nextStep();
-              }}
+              setSelectedSlot={handleSlotSelect}
             />
           )}
           {/* <!-- Step 4: Final Book Appointment --> */}

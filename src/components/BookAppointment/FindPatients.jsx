@@ -10,12 +10,20 @@ const FindPatients = ({
   setSelectedPatient,
   onClose,
 }) => {
-  const [tempSelectedPatient, setTempSelectedPatient] = useState(null);
+  const [selectedId, setSelectedId] = useState(null);
+
   const handleClose = () => {
     setSearchInput("");
-    setTempSelectedPatient(null);
-    setSelectedPatient(null);
+    setSelectedId(null);
     onClose();
+  };
+
+  const handleConfirm = () => {
+    const selected = data?.patients?.find((p) => p._id === selectedId);
+    if (selected) {
+      setSelectedPatient({ ...selected, type: "other" });
+      handleClose();
+    }
   };
 
   return (
@@ -50,11 +58,11 @@ const FindPatients = ({
                   key={patient._id}
                   className={`p-2 flex justify-between border-2 rounded-xl shadow cursor-pointer transition 
                     ${
-                      tempSelectedPatient === patient._id
+                      selectedId === patient._id
                         ? "border-blue-600 bg-blue-100 shadow-blue-300"
                         : "border-cyan-100 border-b-cyan-300 shadow-gray-300 hover:shadow-sky-300"
                     }`}
-                  onClick={() => setTempSelectedPatient(patient._id)}
+                  onClick={() => setSelectedId(patient._id)}
                 >
                   <h5 className="text-xl font-semibold tracking-tight text-gray-800 capitalize">
                     {patient.firstName + " " + patient.lastName}
@@ -71,7 +79,7 @@ const FindPatients = ({
             )}
           </div>
         )}
-        <div className="flex justify-between mt-4">
+        <div className="flex justify-evenly mt-4">
           <button
             className="py-3 w-40 cursor-pointer font-medium text-white bg-rose-600 shadow-lg shadow-rose-500/50 hover:bg-rose-500 rounded-xl inline-flex space-x-2 items-center justify-center"
             type="button"
@@ -82,15 +90,8 @@ const FindPatients = ({
           <button
             className="button w-40"
             type="button"
-            disabled={!tempSelectedPatient}
-            onClick={() => {
-              if (tempSelectedPatient) {
-                setSelectedPatient(tempSelectedPatient);
-                setSearchInput("");
-                setTempSelectedPatient(null);
-                onClose();
-              }
-            }}
+            disabled={!selectedId}
+            onClick={handleConfirm}
           >
             Confirm
           </button>
