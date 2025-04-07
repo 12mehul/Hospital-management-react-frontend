@@ -7,6 +7,7 @@ import SpecialityLists from "../components/BookAppointment/SpecialityLists";
 import DoctorLists from "../components/BookAppointment/DoctorLists";
 import SlotLists from "../components/BookAppointment/SlotLists";
 import FindPatients from "../components/BookAppointment/FindPatients";
+import FinalAppointmentCard from "../components/BookAppointment/FinalAppointmentCard";
 
 const BookAppointment = () => {
   const { user } = useAuth();
@@ -23,13 +24,15 @@ const BookAppointment = () => {
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [selectedPatient, setSelectedPatient] = useState(null);
+  console.log(selectedPatient);
 
   useEffect(() => {
     if (user && role === "patient") {
       setSelectedPatient({
-        id: user._id,
-        name: `${user.firstName} ${user.lastName}`,
-        patientId: user.patientID,
+        _id: user._id,
+        patientID: user.patientID,
+        firstName: user.firstName,
+        lastName: user.lastName,
         type: "self",
       });
     }
@@ -78,6 +81,19 @@ const BookAppointment = () => {
     setStep(2);
     setSelectedSpeciality({ id: null, isFilter: "allDoctors" });
     setSelectedDoctor(null);
+  };
+
+  const onCancel = () => {
+    setSelectedSpeciality({ id: null, isFilter: "filterDoctors" });
+    setSelectedDoctor(null);
+    setSelectedSlot(null);
+    setSelectedPatient(null);
+    setStep(1);
+  };
+
+  const handleCancelAppointment = () => {
+    onCancel();
+    toast.error("Appointment Cancelled");
   };
 
   return (
@@ -166,6 +182,17 @@ const BookAppointment = () => {
             />
           )}
           {/* <!-- Step 4: Final Book Appointment --> */}
+          {step === 4 && (
+            <FinalAppointmentCard
+              patient={selectedPatient}
+              speciality={specialities?.specialities.find(
+                (s) => s._id === selectedSpeciality.id
+              )}
+              doctor={doctors?.doctors.find((d) => d._id === selectedDoctor)}
+              slot={slots?.slots.find((s) => s._id === selectedSlot)}
+              onCancel={handleCancelAppointment}
+            />
+          )}
           {/* <!-- Find Other Patients --> */}
           {isModalOpen && (
             <FindPatients

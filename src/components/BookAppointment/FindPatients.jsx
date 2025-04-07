@@ -81,7 +81,7 @@ const FindPatients = ({
         )}
         <div className="flex justify-evenly mt-4">
           <button
-            className="py-3 w-40 cursor-pointer font-medium text-white bg-rose-600 shadow-lg shadow-rose-500/50 hover:bg-rose-500 rounded-xl inline-flex space-x-2 items-center justify-center"
+            className="button--danger w-40"
             type="button"
             onClick={handleClose}
           >
