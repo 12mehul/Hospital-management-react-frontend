@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer } from "react";
 import backIcon from "../assets/icon/back-icon.jpg";
 import { useAdminFetch } from "../customHooks/useAdminFetch";
 import { useToast } from "../context/ToastProvider";
@@ -8,33 +8,41 @@ import DoctorLists from "../components/BookAppointment/DoctorLists";
 import SlotLists from "../components/BookAppointment/SlotLists";
 import FindPatients from "../components/BookAppointment/FindPatients";
 import FinalAppointmentCard from "../components/BookAppointment/FinalAppointmentCard";
+import {
+  bookAppointmentReducer,
+  initialState,
+} from "../reducers/bookAppointmentReducer";
 
 const BookAppointment = () => {
   const { user } = useAuth();
   const toast = useToast();
-  const [step, setStep] = useState(1);
-  const [searchInput, setSearchInput] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const role = localStorage.getItem("role");
+  const [state, dispatch] = useReducer(bookAppointmentReducer, initialState);
+  const {
+    step,
+    searchInput,
+    isModalOpen,
+    selectedSpeciality,
+    selectedDoctor,
+    selectedSlot,
+    selectedPatient,
+  } = state;
 
-  const [selectedSpeciality, setSelectedSpeciality] = useState({
-    id: null,
-    isFilter: "filterDoctors",
-  });
-  const [selectedDoctor, setSelectedDoctor] = useState(null);
-  const [selectedSlot, setSelectedSlot] = useState(null);
-  const [selectedPatient, setSelectedPatient] = useState(null);
-  console.log(selectedPatient);
+  const getPatientProfile = () => {
+    return role === "patient" && user
+      ? {
+          _id: user._id,
+          patientID: user.patientID,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          type: "self",
+        }
+      : null;
+  };
 
   useEffect(() => {
     if (user && role === "patient") {
-      setSelectedPatient({
-        _id: user._id,
-        patientID: user.patientID,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        type: "self",
-      });
+      dispatch({ type: "SET_SELECTED_PATIENT", payload: getPatientProfile() });
     }
   }, [user, role]);
 
@@ -54,42 +62,30 @@ const BookAppointment = () => {
     searchInput ? `/patients/search?name=${searchInput}` : null
   );
 
-  const prevStep = () => setStep((prev) => prev - 1);
-  const nextStep = () => setStep((prev) => prev + 1);
+  const handleBack = () => dispatch({ type: "PREV_STEP" });
+  const handleOpenModal = () => dispatch({ type: "TOGGLE_MODAL" });
+  const handleCloseModal = () => dispatch({ type: "TOGGLE_MODAL" });
+  const handleSearchInputChange = (value) =>
+    dispatch({ type: "SET_SEARCH_INPUT", payload: value });
 
-  const handleSpecialitySelect = (id) => {
-    setSelectedSpeciality({ id, isFilter: "filterDoctors" });
-    nextStep();
-  };
+  const handleSpecialityClick = () =>
+    dispatch({ type: "RESET", payload: getPatientProfile() });
 
-  const handleDoctorSelect = (id) => {
-    setSelectedSpeciality({ id, isFilter: "selectedDoctor" });
-    nextStep();
-  };
+  const handleDoctorsClick = () => dispatch({ type: "OPEN_DOCTOR_TAB" });
 
-  const handleSlotSelect = (id) => {
-    setSelectedSlot(id);
-    nextStep();
-  };
+  const handleSpecialitySelect = (id) =>
+    dispatch({ type: "SET_SPECIALITY", payload: id });
 
-  const handleStepOneClick = () => {
-    setStep(1);
-    setSelectedSpeciality({ id: null, isFilter: "filterDoctors" });
-  };
+  const handleDoctorSelect = (doctorId, specialityId) =>
+    dispatch({ type: "SET_DOCTOR", payload: { doctorId, specialityId } });
 
-  const handleStepTwoClick = () => {
-    setStep(2);
-    setSelectedSpeciality({ id: null, isFilter: "allDoctors" });
-    setSelectedDoctor(null);
-  };
+  const handleSlotSelect = (id) => dispatch({ type: "SET_SLOT", payload: id });
 
-  const onCancel = () => {
-    setSelectedSpeciality({ id: null, isFilter: "filterDoctors" });
-    setSelectedDoctor(null);
-    setSelectedSlot(null);
-    setSelectedPatient(null);
-    setStep(1);
-  };
+  const handlePatientSelect = (patient) =>
+    dispatch({ type: "SET_SELECTED_PATIENT", payload: patient });
+
+  const onCancel = () =>
+    dispatch({ type: "RESET", payload: getPatientProfile() });
 
   const handleCancelAppointment = () => {
     onCancel();
@@ -112,7 +108,7 @@ const BookAppointment = () => {
               />
               <span
                 className="text-lg cursor-pointer font-medium text-blue-800 hover:text-rose-600"
-                onClick={prevStep}
+                onClick={handleBack}
               >
                 Back
               </span>
@@ -125,7 +121,7 @@ const BookAppointment = () => {
                   ? "text-blue-800 border-b-2 border-blue-600"
                   : "hover:text-blue-700"
               }`}
-              onClick={handleStepOneClick}
+              onClick={handleSpecialityClick}
             >
               Speciality
             </button>
@@ -135,7 +131,7 @@ const BookAppointment = () => {
                   ? "text-blue-800 border-b-2 border-blue-600"
                   : "hover:text-blue-700"
               }`}
-              onClick={handleStepTwoClick}
+              onClick={handleDoctorsClick}
             >
               Doctors
             </button>
@@ -146,7 +142,7 @@ const BookAppointment = () => {
                   : "text-gray-400 cursor-not-allowed"
               }`}
               disabled={step > 1}
-              onClick={() => setIsModalOpen(true)}
+              onClick={handleOpenModal}
             >
               Other Patients
             </button>
@@ -167,8 +163,9 @@ const BookAppointment = () => {
               loading={loadingDoctor}
               data={doctors}
               selectedSpeciality={selectedSpeciality}
-              setSelectedSpeciality={handleDoctorSelect}
-              setSelectedDoctor={setSelectedDoctor}
+              setSelectedDoctor={(doctorId, specialityId) =>
+                handleDoctorSelect(doctorId, specialityId)
+              }
             />
           )}
           {/* <!-- Step 3: Slots --> */}
@@ -199,9 +196,9 @@ const BookAppointment = () => {
               loading={loadingPatient}
               data={patients}
               searchInput={searchInput}
-              setSearchInput={setSearchInput}
-              setSelectedPatient={setSelectedPatient}
-              onClose={() => setIsModalOpen(false)}
+              setSearchInput={handleSearchInputChange}
+              setSelectedPatient={handlePatientSelect}
+              onClose={handleCloseModal}
             />
           )}
         </form>

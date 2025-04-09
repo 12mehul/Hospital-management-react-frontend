@@ -6,7 +6,6 @@ const DoctorLists = ({
   loading,
   data,
   selectedSpeciality,
-  setSelectedSpeciality,
   setSelectedDoctor,
 }) => {
   return (
@@ -51,10 +50,7 @@ const DoctorLists = ({
                       className="px-3 py-1 rounded-md cursor-pointer text-start font-medium text-white bg-sky-600 shadow-lg shadow-sky-500/50 hover:bg-sky-500"
                       type="button"
                       key={s._id}
-                      onClick={() => {
-                        setSelectedSpeciality(s._id);
-                        setSelectedDoctor(val._id);
-                      }}
+                      onClick={() => setSelectedDoctor(val._id, s._id)} // both doctor and speciality id pass
                     >
                       {s.title}
                     </button>
