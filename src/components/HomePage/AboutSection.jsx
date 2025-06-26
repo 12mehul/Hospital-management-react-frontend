@@ -31,7 +31,7 @@ const AboutSection = () => {
           </p>
         </div>
       </div>
-      <div className="mt-10 lg:mt-0 w-full lg:w-1/2 flex items-center justify-center">
+      <div className="mt-10 lg:mt-0 w-full lg:w-1/2 flex items-center justify-center bg-[#edf2fa] rounded-xl">
         <img
           src={aboutImg}
           alt="About illustration"

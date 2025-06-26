@@ -7,9 +7,9 @@ const HeaderSection = () => {
 
   return (
     <header className="sticky top-0 bg-white shadow">
-      <div className="container flex flex-col gap-2 sm:flex-row justify-between items-center mx-auto py-4 px-8">
+      <div className="container flex flex-col gap-2 sm:flex-row justify-between items-center mx-auto py-2 px-8">
         <div className="flex items-center gap-2">
-          <img src={logo} alt="logo" className="w-18 h-18 rounded-lg" />
+          <img src={logo} alt="logo" className="w-16 h-16 rounded-lg" />
         </div>
         <div className="flex items-center space-x-6">
           <a href="#home" className="anchor-btn group">

@@ -6,9 +6,23 @@ import {
   SearchIcon,
   ThreeDotIcon,
 } from "../assets/SVGIcons";
+import { useAdminFetch } from "../customHooks/useAdminFetch";
 
 const AppointmentLists = () => {
+  const id = localStorage.getItem("id");
   const role = localStorage.getItem("role");
+
+  // Construct query based on role
+  const query =
+    role === "patient"
+      ? `patientId=${id}`
+      : role === "doctor"
+      ? `doctorId=${id}`
+      : null;
+
+  const { data, loading } = useAdminFetch(
+    query ? `/appointments?${query}` : null
+  );
 
   const clearInput = () => {};
 
@@ -82,35 +96,43 @@ const AppointmentLists = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-300">
-                  <tr className="bg-white transition-all duration-500 hover:bg-gray-100">
-                    <td className="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 capitalize">
-                      {/* ${val.patientId.firstName + " " + val.patientId.lastName} */}
-                    </td>
-                    <td className="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 capitalize">
-                      {/* ${val.doctorId.firstName + " " + val.doctorId.lastName} */}
-                    </td>
-                    <td className="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">
-                      {/* ${val.specializationId.title} */}
-                    </td>
-                    <td className="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">
-                      {/* ${new Date(val.slotId.date).toLocaleDateString()} $ */}
-                      {/* {val.slotId.time} */}
-                    </td>
-                    <td className="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">
-                      {/* ${new Date(val.createdAt).toLocaleDateString()} */}
-                    </td>
-                    <td className="p-5 flex items-center gap-1">
-                      <button className="p-2 cursor-pointer rounded-full bg-white group transition-all duration-500 flex item-center hover:bg-indigo-600">
-                        <EditIcon />
-                      </button>
-                      <button className="p-2 cursor-pointer rounded-full bg-white group transition-all duration-500 flex item-center hover:bg-rose-600">
-                        <DeleteIcon />
-                      </button>
-                      <button className="p-2 cursor-pointer rounded-full bg-white group transition-all duration-500 flex item-center hover:bg-gray-500">
-                        <ThreeDotIcon />
-                      </button>
-                    </td>
-                  </tr>
+                  {data &&
+                    data.appointments.map((val) => (
+                      <tr
+                        className="bg-white transition-all duration-500 hover:bg-gray-100"
+                        key={val._id}
+                      >
+                        <td className="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 capitalize">
+                          {val.patientId.firstName +
+                            " " +
+                            val.patientId.lastName}
+                        </td>
+                        <td className="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 capitalize">
+                          {val.doctorId.firstName + " " + val.doctorId.lastName}
+                        </td>
+                        <td className="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">
+                          {val.specializationId.title}
+                        </td>
+                        <td className="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">
+                          {new Date(val.slotId.date).toLocaleDateString()}{" "}
+                          {val.slotId.time}
+                        </td>
+                        <td className="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">
+                          {new Date(val.createdAt).toLocaleDateString()}
+                        </td>
+                        <td className="p-5 flex items-center gap-1">
+                          <button className="p-2 cursor-pointer rounded-full bg-white group transition-all duration-500 flex item-center hover:bg-indigo-600">
+                            <EditIcon />
+                          </button>
+                          <button className="p-2 cursor-pointer rounded-full bg-white group transition-all duration-500 flex item-center hover:bg-rose-600">
+                            <DeleteIcon />
+                          </button>
+                          <button className="p-2 cursor-pointer rounded-full bg-white group transition-all duration-500 flex item-center hover:bg-gray-500">
+                            <ThreeDotIcon />
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>

@@ -5,7 +5,7 @@ import appointmentImg from "../../assets/img/appointment_booking_home.jpg";
 const AppointmentSection = () => {
   return (
     <div className="container mx-auto px-6 md:px-12 lg:px-16 py-8 flex flex-col-reverse lg:flex-row items-center justify-between">
-      <div className="mt-10 lg:mt-0 w-full lg:w-1/2 px-6 md:px-10 lg:px-14 flex items-center justify-center lg:justify-start">
+      <div className="mt-10 lg:mt-0 w-full lg:w-1/2 px-6 md:px-10 lg:px-14 flex items-center justify-center bg-[#edf2fa] rounded-xl">
         <img
           src={appointmentImg}
           alt="Appointment illustration"

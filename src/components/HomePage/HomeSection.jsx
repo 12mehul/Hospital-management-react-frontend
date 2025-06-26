@@ -25,11 +25,11 @@ const HomeSection = () => {
           </p>
         </div>
       </div>
-      <div className="mt-10 lg:mt-0 w-full lg:w-1/2 flex items-center justify-center">
+      <div className="mt-10 lg:mt-0 w-full lg:w-1/2 flex items-center justify-center bg-[#edf2fa] rounded-xl">
         <img
           src={doctorImg}
           alt="Doctor illustration"
-          className="rounded-full shadow-lg shadow-gray-300 w-64 md:w-80 lg:w-96"
+          className="rounded-lg shadow-lg shadow-gray-300 w-64 md:w-80 lg:w-96"
         />
       </div>
     </div>
