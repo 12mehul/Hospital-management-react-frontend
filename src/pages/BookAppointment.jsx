@@ -1,7 +1,6 @@
 import React, { useEffect, useReducer } from "react";
 import backIcon from "../assets/icon/back-icon.jpg";
 import { useAdminFetch } from "../customHooks/useAdminFetch";
-import { useToast } from "../context/ToastProvider";
 import { useAuth } from "../context/AuthContext";
 import SpecialityLists from "../components/BookAppointment/SpecialityLists";
 import DoctorLists from "../components/BookAppointment/DoctorLists";
@@ -15,7 +14,6 @@ import {
 
 const BookAppointment = () => {
   const { user } = useAuth();
-  const toast = useToast();
   const role = localStorage.getItem("role");
   const [state, dispatch] = useReducer(bookAppointmentReducer, initialState);
   const {
@@ -86,11 +84,6 @@ const BookAppointment = () => {
 
   const onCancel = () =>
     dispatch({ type: "RESET", payload: getPatientProfile() });
-
-  const handleCancelAppointment = () => {
-    onCancel();
-    toast.error("Appointment Cancelled");
-  };
 
   return (
     <>
@@ -187,7 +180,7 @@ const BookAppointment = () => {
               )}
               doctor={doctors?.doctors.find((d) => d._id === selectedDoctor)}
               slot={slots?.slots.find((s) => s._id === selectedSlot)}
-              onCancel={handleCancelAppointment}
+              onCancel={onCancel}
             />
           )}
           {/* <!-- Find Other Patients --> */}

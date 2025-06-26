@@ -1,4 +1,5 @@
-import React from "react";
+import { useToast } from "../../context/ToastProvider";
+import adminFetch from "../../axiosbase/interceptors";
 
 const FinalAppointmentCard = ({
   patient,
@@ -7,6 +8,51 @@ const FinalAppointmentCard = ({
   slot,
   onCancel,
 }) => {
+  const toast = useToast();
+
+  const handleCancelAppointment = () => {
+    onCancel();
+    toast.error("Appointment Cancelled");
+  };
+
+  const handleBookAppointment = async (e) => {
+    e.preventDefault();
+
+    if (!speciality._id) {
+      toast.error("Please select a speciality");
+      return;
+    }
+    if (!doctor._id) {
+      toast.error("Please select a doctor");
+      return;
+    }
+    if (!slot._id) {
+      toast.error("Please select a slot");
+      return;
+    }
+    if (!patient?._id) {
+      toast.error("Please select a patient");
+      return;
+    }
+
+    const appointmentData = {
+      specializationId: speciality._id,
+      doctorId: doctor._id,
+      slotId: slot._id,
+      patientId: patient._id,
+    };
+
+    try {
+      const res = await adminFetch.post("/appointments", appointmentData);
+      if (res.data) {
+        toast.success(res.data.msg);
+        setTimeout(() => onCancel(), 1000);
+      }
+    } catch (error) {
+      toast.error(error.response?.data.msg || "Failed to book appointment");
+    }
+  };
+
   return (
     <div className="mt-6">
       <div className="max-w-lg mx-auto h-auto p-6 bg-white rounded-xl shadow-md shadow-gray-300 transition transform duration-500 hover:scale-105 hover:shadow-blue-500 hover:transition">
@@ -51,11 +97,15 @@ const FinalAppointmentCard = ({
           <button
             className="button--danger w-42 text-sm"
             type="button"
-            onClick={onCancel}
+            onClick={handleCancelAppointment}
           >
             Cancel Appointment
           </button>
-          <button className="button w-42 text-sm" type="submit">
+          <button
+            className="button w-42 text-sm"
+            type="button"
+            onClick={handleBookAppointment}
+          >
             Book Appointment
           </button>
         </div>
